@@ -1,122 +1,106 @@
 import { useState } from 'react';
 import { motion, AnimatePresence } from 'motion/react';
-import { ArrowLeft } from 'lucide-react';
-import { EmergenciaMedico } from './components/EmergenciaMedico';
-import { EmergenciaNoMedico } from './components/EmergenciaNoMedico';
-import { NoEmergenciaMedico } from './components/NoEmergenciaMedico';
-import { NoEmergenciaNoMedico } from './components/NoEmergenciaNoMedico';
-import { Switch } from './components/ui/switch';
+import { Heart, Stethoscope, Activity, MessageSquare } from 'lucide-react';
+import { Routes, Route, useNavigate } from 'react-router-dom';
+import Emergency from './pages/Emergency';
+import NonEmergency from './pages/NonEmergency';
+import { DiagnosticHelper } from './components/DiagnosticHelper';
+import { ContactModal } from './components/ContactModal';
 
-type Screen = 'home' | 'emergencia-medico' | 'emergencia-no-medico' | 'no-emergencia-medico' | 'no-emergencia-no-medico';
-
-export default function App() {
-  const [currentScreen, setCurrentScreen] = useState<Screen>('home');
-  const [isMedico, setIsMedico] = useState(false);
-  const [isEmergencia, setIsEmergencia] = useState(false);
-
-  const handleContinuar = () => {
-    if (isMedico && isEmergencia) {
-      setCurrentScreen('emergencia-medico');
-    } else if (isMedico && !isEmergencia) {
-      setCurrentScreen('no-emergencia-medico');
-    } else if (!isMedico && isEmergencia) {
-      setCurrentScreen('emergencia-no-medico');
-    } else {
-      setCurrentScreen('no-emergencia-no-medico');
-    }
-  };
-
-  const handleGoBack = () => {
-    setCurrentScreen('home');
-  };
+function Home() {
+  const navigate = useNavigate();
+  const [isContactOpen, setIsContactOpen] = useState(false);
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-blue-50 to-blue-100 overflow-hidden">
-      <AnimatePresence mode="wait">
-        {currentScreen === 'home' ? (
-          <motion.div
-            key="home"
-            initial={{ y: '100%' }}
-            animate={{ y: 0 }}
-            exit={{ y: '-100%' }}
-            transition={{ type: 'spring', stiffness: 300, damping: 30 }}
-            className="min-h-screen flex flex-col items-center justify-center p-6"
+    <motion.div
+      initial={{ opacity: 0 }}
+      animate={{ opacity: 1 }}
+      exit={{ opacity: 0, scale: 0.95 }}
+      className="min-h-screen flex flex-col p-6"
+    >
+      <div className="flex-1 flex flex-col max-w-md mx-auto w-full justify-center">
+        <div className="text-center mb-12">
+          <h1 className="text-4xl font-bold text-blue-600 mb-2">
+            PediatrIA
+          </h1>
+          <p className="text-gray-500 text-lg">Guía para Estudiantes</p>
+        </div>
+
+        <div className="grid gap-4">
+          {/* Emergencia */}
+          <button
+            onClick={() => navigate('/emergency')}
+            className="group relative overflow-hidden bg-red-100 text-gray-900 p-6 rounded-3xl shadow-lg hover:shadow-red-500/20 transition-all active:scale-98 border-2 border-red-200 hover:border-red-300"
           >
-            <div className="w-full max-w-2xl bg-white rounded-3xl shadow-2xl p-8 md:p-12">
-              <h1 className="text-center text-blue-600 mb-12">
-                PediatrIA
-              </h1>
-              
-              <div className="space-y-8 mb-12">
-                {/* Switch 1: ¿Eres médico? */}
-                <div className="bg-blue-50 rounded-2xl p-6 border-2 border-blue-200 transition-all hover:border-blue-400">
-                  <div className="flex items-center justify-between gap-6">
-                    <label htmlFor="medico-switch" className="cursor-pointer flex-1">
-                      <span className="block mb-2 text-gray-600">Selecciona tu perfil:</span>
-                      <span className="block">¿Eres médico?</span>
-                    </label>
-                    <div className="flex items-center gap-4">
-                      <span className={`${isMedico ? 'text-gray-400' : 'text-green-600'}`}>
-                        NO
-                      </span>
-                      <Switch
-                        id="medico-switch"
-                        checked={isMedico}
-                        onCheckedChange={setIsMedico}
-                        className="scale-150 data-[state=checked]:bg-blue-600"
-                      />
-                      <span className={`${isMedico ? 'text-green-600' : 'text-gray-400'}`}>
-                        SÍ
-                      </span>
-                    </div>
-                  </div>
-                </div>
-
-                {/* Switch 2: ¿Es emergencia? */}
-                <div className="bg-red-50 rounded-2xl p-6 border-2 border-red-200 transition-all hover:border-red-400">
-                  <div className="flex items-center justify-between gap-6">
-                    <label htmlFor="emergencia-switch" className="cursor-pointer flex-1">
-                      <span className="block mb-2 text-gray-600">Tipo de situación:</span>
-                      <span className="block">¿Es una emergencia?</span>
-                    </label>
-                    <div className="flex items-center gap-4">
-                      <span className={`${isEmergencia ? 'text-gray-400' : 'text-green-600'}`}>
-                        NO
-                      </span>
-                      <Switch
-                        id="emergencia-switch"
-                        checked={isEmergencia}
-                        onCheckedChange={setIsEmergencia}
-                        className="scale-150 data-[state=checked]:bg-red-600"
-                      />
-                      <span className={`${isEmergencia ? 'text-red-600' : 'text-gray-400'}`}>
-                        SÍ
-                      </span>
-                    </div>
-                  </div>
-                </div>
+            <div className="relative flex items-center gap-4">
+              <div className="p-3 bg-white/60 rounded-2xl backdrop-blur-sm text-red-600">
+                <Heart className="w-8 h-8" />
               </div>
-
-              {/* Botón Continuar */}
-              <button
-                onClick={handleContinuar}
-                className="w-full py-6 px-8 bg-gradient-to-r from-blue-600 to-blue-700 text-white rounded-2xl 
-                         shadow-lg hover:shadow-xl active:scale-95 transition-all duration-150
-                         hover:from-blue-700 hover:to-blue-800"
-              >
-                Continuar
-              </button>
+              <div className="text-left">
+                <h2 className="text-xl font-bold text-gray-900">Emergencia</h2>
+                <p className="text-gray-700 text-sm font-medium">Algoritmos y Dosis Críticas</p>
+              </div>
             </div>
-          </motion.div>
-        ) : currentScreen === 'emergencia-medico' ? (
-          <EmergenciaMedico key="emergencia-medico" onGoBack={handleGoBack} />
-        ) : currentScreen === 'emergencia-no-medico' ? (
-          <EmergenciaNoMedico key="emergencia-no-medico" onGoBack={handleGoBack} />
-        ) : currentScreen === 'no-emergencia-medico' ? (
-          <NoEmergenciaMedico key="no-emergencia-medico" onGoBack={handleGoBack} />
-        ) : (
-          <NoEmergenciaNoMedico key="no-emergencia-no-medico" onGoBack={handleGoBack} />
-        )}
+          </button>
+
+          {/* Consulta General */}
+          <button
+            onClick={() => navigate('/non-emergency')}
+            className="group relative overflow-hidden bg-blue-100 text-gray-900 p-6 rounded-3xl shadow-lg hover:shadow-blue-500/20 transition-all active:scale-98 border-2 border-blue-200 hover:border-blue-300"
+          >
+            <div className="relative flex items-center gap-4">
+              <div className="p-3 bg-white/60 text-blue-600 rounded-2xl backdrop-blur-sm">
+                <Stethoscope className="w-8 h-8" />
+              </div>
+              <div className="text-left">
+                <h2 className="text-xl font-bold text-gray-900">Consulta General</h2>
+                <p className="text-gray-700 text-sm font-medium">Herramientas y Guías</p>
+              </div>
+            </div>
+          </button>
+
+          {/* Ayudante Diagnóstico */}
+          <button
+            onClick={() => navigate('/diagnostic')}
+            className="group relative overflow-hidden bg-indigo-100 text-gray-900 p-6 rounded-3xl shadow-lg hover:shadow-indigo-500/20 transition-all active:scale-98 border-2 border-indigo-200 hover:border-indigo-300"
+          >
+            <div className="relative flex items-center gap-4">
+              <div className="p-3 bg-white/60 rounded-2xl backdrop-blur-sm text-indigo-600">
+                <Activity className="w-8 h-8" />
+              </div>
+              <div className="text-left">
+                <h2 className="text-xl font-bold text-gray-900">Ayudante Diagnóstico</h2>
+                <p className="text-gray-700 text-sm font-medium">Sistema de Decisiones Clínicas</p>
+              </div>
+            </div>
+          </button>
+
+          {/* Contacto */}
+          <button
+            onClick={() => setIsContactOpen(true)}
+            className="mt-4 flex items-center justify-center gap-2 text-gray-400 hover:text-gray-600 transition-colors py-4"
+          >
+            <MessageSquare className="w-5 h-5" />
+            <span>Sugerencias y Reportes</span>
+          </button>
+        </div>
+      </div>
+
+      <ContactModal isOpen={isContactOpen} onClose={() => setIsContactOpen(false)} />
+    </motion.div>
+  );
+}
+
+export default function App() {
+  return (
+    <div className="min-h-screen bg-gradient-to-br from-blue-50 to-indigo-50 overflow-hidden font-sans">
+      <AnimatePresence mode="wait">
+        <Routes>
+          <Route path="/" element={<Home />} />
+          <Route path="/emergency" element={<Emergency />} />
+          <Route path="/non-emergency" element={<NonEmergency />} />
+          <Route path="/diagnostic" element={<DiagnosticHelper onGoBack={() => window.history.back()} />} />
+        </Routes>
       </AnimatePresence>
     </div>
   );

@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import { motion } from 'motion/react';
-import { ArrowLeft, Heart, AlertTriangle, Wind, Zap, Activity, Calculator, FileText, Phone } from 'lucide-react';
+import { ArrowLeft, Heart, AlertTriangle, Wind, Zap, Activity, Calculator, FileText, Phone, AlertCircle } from 'lucide-react';
 
 interface EmergenciaMedicoProps {
   onGoBack: () => void;
@@ -11,7 +11,6 @@ type Section = 'main' | 'algoritmos' | 'calculadoras' | 'procedimientos';
 export function EmergenciaMedico({ onGoBack }: EmergenciaMedicoProps) {
   const [section, setSection] = useState<Section>('main');
   const [selectedAlgoritmo, setSelectedAlgoritmo] = useState<string | null>(null);
-  const [selectedCalculadora, setSelectedCalculadora] = useState<string | null>(null);
   const [peso, setPeso] = useState('');
 
   const algoritmos = [
@@ -20,29 +19,42 @@ export function EmergenciaMedico({ onGoBack }: EmergenciaMedicoProps) {
     { id: 'asma', nombre: 'Crisis Asmática Grave', icon: Wind },
     { id: 'convulsiones', nombre: 'Convulsiones', icon: Zap },
     { id: 'tce', nombre: 'Traumatismo Craneoencefálico Grave', icon: Activity },
+    { id: 'deshidratacion', nombre: 'Deshidratación Severa / Shock', icon: Activity },
   ];
 
   const medicamentosEmergencia = [
-    { nombre: 'Adrenalina', dosis: '0.01 mg/kg (máx 0.5 mg) IM', presentacion: 'Ampolla 1mg/1ml' },
-    { nombre: 'Atropina', dosis: '0.02 mg/kg (mín 0.1mg, máx 0.5mg)', presentacion: 'Ampolla 1mg/1ml' },
-    { nombre: 'Bicarbonato', dosis: '1 mEq/kg IV', presentacion: '1 mEq/ml' },
-    { nombre: 'Lidocaína', dosis: '1 mg/kg IV', presentacion: 'Ampolla 100mg/5ml' },
-    { nombre: 'Midazolam', dosis: '0.1-0.2 mg/kg IM/IV', presentacion: 'Ampolla 5mg/5ml' },
+    { nombre: 'Adrenalina', dosis: '0.01 mg/kg (máx 0.5 mg) IM', presentacion: 'Ampolla 1mg/1ml', maxDosis: 0.5 },
+    { nombre: 'Atropina', dosis: '0.02 mg/kg (mín 0.1mg, máx 0.5mg)', presentacion: 'Ampolla 1mg/1ml', maxDosis: 0.5, minDosis: 0.1 },
+    { nombre: 'Bicarbonato', dosis: '1 mEq/kg IV', presentacion: '1 mEq/ml', maxDosis: 50 },
+    { nombre: 'Lidocaína', dosis: '1 mg/kg IV', presentacion: 'Ampolla 100mg/5ml', maxDosis: 100 },
+    { nombre: 'Midazolam', dosis: '0.1-0.2 mg/kg IM/IV', presentacion: 'Ampolla 5mg/5ml', maxDosis: 10 },
+    { nombre: 'Diazepam', dosis: '0.3-0.5 mg/kg Rectal', presentacion: 'Ampolla 10mg/2ml', maxDosis: 10 },
   ];
 
   const calcularDosis = (medicamento: string, pesoKg: number) => {
-    const dosis: any = {
-      'Adrenalina': pesoKg * 0.01,
-      'Atropina': Math.max(0.1, Math.min(0.5, pesoKg * 0.02)),
-      'Bicarbonato': pesoKg * 1,
-      'Lidocaína': pesoKg * 1,
-      'Midazolam': pesoKg * 0.15,
-    };
-    return dosis[medicamento]?.toFixed(2) || '0';
+    const med = medicamentosEmergencia.find(m => m.nombre === medicamento);
+    if (!med) return '0';
+
+    let dosisCalculada = 0;
+
+    switch (medicamento) {
+      case 'Adrenalina': dosisCalculada = pesoKg * 0.01; break;
+      case 'Atropina': dosisCalculada = pesoKg * 0.02; break;
+      case 'Bicarbonato': dosisCalculada = pesoKg * 1; break;
+      case 'Lidocaína': dosisCalculada = pesoKg * 1; break;
+      case 'Midazolam': dosisCalculada = pesoKg * 0.15; break;
+      case 'Diazepam': dosisCalculada = pesoKg * 0.4; break;
+      default: dosisCalculada = 0;
+    }
+
+    if (med.minDosis && dosisCalculada < med.minDosis) dosisCalculada = med.minDosis;
+    if (med.maxDosis && dosisCalculada > med.maxDosis) return `${med.maxDosis} (Dosis Máxima)`;
+
+    return dosisCalculada.toFixed(2);
   };
 
   const renderAlgoritmoDetalle = (id: string) => {
-    const algoritmos: any = {
+    const algoritmosData: any = {
       'rcp': {
         titulo: 'RCP Pediátrica',
         pasos: [
@@ -103,10 +115,22 @@ export function EmergenciaMedico({ onGoBack }: EmergenciaMedicoProps) {
           'Considerar manitol si signos de herniación: 0.25-1 g/kg IV',
           'Derivación urgente a neurocirugía',
         ]
+      },
+      'deshidratacion': {
+        titulo: 'Deshidratación Severa / Shock',
+        pasos: [
+          'Evaluar signos de shock: taquicardia, pulsos débiles, llenado capilar >2s',
+          'Acceso vascular inmediato (IV o IO)',
+          'Bolo de Suero Fisiológico o Ringer Lactato: 20 ml/kg en 5-10 min',
+          'Reevaluar signos de perfusión y sobrecarga',
+          'Repetir bolo si es necesario (hasta 60 ml/kg)',
+          'Si no responde: considerar inotrópicos y causa cardiogénica',
+          'Corregir hipoglicemia e hipocalcemia si presentes',
+        ]
       }
     };
 
-    const algoritmo = algoritmos[id];
+    const algoritmo = algoritmosData[id];
     return (
       <div className="space-y-4">
         <h3 className="text-blue-600 mb-4">{algoritmo.titulo}</h3>
@@ -133,7 +157,6 @@ export function EmergenciaMedico({ onGoBack }: EmergenciaMedicoProps) {
       className="min-h-screen bg-gradient-to-br from-red-50 to-orange-50 p-6"
     >
       <div className="max-w-4xl mx-auto">
-        {/* Header */}
         <div className="bg-red-600 text-white rounded-2xl p-6 mb-6 shadow-xl">
           <div className="flex items-center gap-4 mb-2">
             <button
@@ -144,7 +167,7 @@ export function EmergenciaMedico({ onGoBack }: EmergenciaMedicoProps) {
             </button>
             <div className="flex-1">
               <h1 className="text-white">EMERGENCIA</h1>
-              <p className="text-red-100">Modo Médico</p>
+              <p className="text-red-100">Algoritmos y Dosis Críticas</p>
             </div>
             <AlertTriangle className="w-12 h-12" />
           </div>
@@ -156,7 +179,6 @@ export function EmergenciaMedico({ onGoBack }: EmergenciaMedicoProps) {
             animate={{ opacity: 1 }}
             className="space-y-4"
           >
-            {/* Algoritmos de Emergencia */}
             <button
               onClick={() => setSection('algoritmos')}
               className="w-full bg-white p-6 rounded-2xl shadow-lg hover:shadow-xl active:scale-98 transition-all
@@ -167,11 +189,10 @@ export function EmergenciaMedico({ onGoBack }: EmergenciaMedicoProps) {
               </div>
               <div className="flex-1 text-left">
                 <h3 className="text-red-600">Algoritmos de Emergencia</h3>
-                <p className="text-gray-600">RCP, Anafilaxia, Crisis Asmática, Convulsiones, TCE</p>
+                <p className="text-gray-600">RCP, Anafilaxia, Crisis Asmática, Shock</p>
               </div>
             </button>
 
-            {/* Calculadoras de Dosis */}
             <button
               onClick={() => setSection('calculadoras')}
               className="w-full bg-white p-6 rounded-2xl shadow-lg hover:shadow-xl active:scale-98 transition-all
@@ -182,11 +203,10 @@ export function EmergenciaMedico({ onGoBack }: EmergenciaMedicoProps) {
               </div>
               <div className="flex-1 text-left">
                 <h3 className="text-orange-600">Calculadoras de Dosis</h3>
-                <p className="text-gray-600">Adrenalina, Atropina, Bicarbonato, Lidocaína y más</p>
+                <p className="text-gray-600">Dosis de emergencia con alertas de seguridad</p>
               </div>
             </button>
 
-            {/* Guía de Procedimientos */}
             <button
               onClick={() => setSection('procedimientos')}
               className="w-full bg-white p-6 rounded-2xl shadow-lg hover:shadow-xl active:scale-98 transition-all
@@ -201,7 +221,6 @@ export function EmergenciaMedico({ onGoBack }: EmergenciaMedicoProps) {
               </div>
             </button>
 
-            {/* Llamada de Emergencia */}
             <a
               href="tel:911"
               className="w-full bg-gradient-to-r from-red-600 to-red-700 text-white p-6 rounded-2xl shadow-lg 
@@ -269,26 +288,39 @@ export function EmergenciaMedico({ onGoBack }: EmergenciaMedicoProps) {
             </div>
 
             <div className="mb-6 bg-orange-50 p-6 rounded-xl border-2 border-orange-200">
-              <label className="block mb-3">Peso del paciente (kg):</label>
+              <label className="block mb-3 font-bold text-orange-800">Peso del paciente (kg):</label>
               <input
                 type="number"
                 value={peso}
                 onChange={(e) => setPeso(e.target.value)}
                 placeholder="Ingrese el peso"
-                className="w-full p-4 border-2 border-orange-300 rounded-xl focus:border-orange-500 focus:outline-none"
+                className="w-full p-4 border-2 border-orange-300 rounded-xl focus:border-orange-500 focus:outline-none text-lg"
               />
+              {peso && parseFloat(peso) > 40 && (
+                <div className="mt-2 flex items-center gap-2 text-orange-700 bg-orange-100 p-2 rounded-lg">
+                  <AlertCircle className="w-5 h-5" />
+                  <span className="text-sm">Peso adulto: verificar dosis máximas.</span>
+                </div>
+              )}
             </div>
 
             <div className="space-y-4">
               {medicamentosEmergencia.map((med) => (
                 <div key={med.nombre} className="bg-gray-50 p-5 rounded-xl border-2 border-gray-200">
-                  <h3 className="text-gray-900 mb-2">{med.nombre}</h3>
-                  <p className="text-gray-600 mb-2">Dosis: {med.dosis}</p>
-                  <p className="text-gray-600 mb-3">Presentación: {med.presentacion}</p>
+                  <div className="flex justify-between items-start mb-2">
+                    <h3 className="text-lg font-bold text-gray-900">{med.nombre}</h3>
+                    {med.maxDosis && (
+                      <span className="text-xs bg-red-100 text-red-600 px-2 py-1 rounded-full border border-red-200">
+                        Máx: {med.maxDosis} {med.nombre === 'Bicarbonato' ? 'mEq' : 'mg'}
+                      </span>
+                    )}
+                  </div>
+                  <p className="text-gray-600 mb-1 text-sm">Dosis: {med.dosis}</p>
+                  <p className="text-gray-600 mb-3 text-sm">Presentación: {med.presentacion}</p>
                   {peso && parseFloat(peso) > 0 && (
                     <div className="bg-orange-100 p-4 rounded-lg border-2 border-orange-300">
-                      <p className="text-orange-900">
-                        Dosis calculada: <span>{calcularDosis(med.nombre, parseFloat(peso))} {med.nombre === 'Bicarbonato' ? 'mEq' : 'mg'}</span>
+                      <p className="text-orange-900 font-medium">
+                        Dosis calculada: <span className="text-xl font-bold">{calcularDosis(med.nombre, parseFloat(peso))} {med.nombre === 'Bicarbonato' ? 'mEq' : 'mg'}</span>
                       </p>
                     </div>
                   )}
@@ -312,7 +344,7 @@ export function EmergenciaMedico({ onGoBack }: EmergenciaMedicoProps) {
 
             <div className="space-y-6">
               <div className="bg-blue-50 p-6 rounded-xl border-2 border-blue-200">
-                <h3 className="text-blue-600 mb-3">Intubación Endotraqueal</h3>
+                <h3 className="text-blue-600 mb-3 font-bold">Intubación Endotraqueal</h3>
                 <ul className="space-y-2 text-gray-700">
                   <li>• Tubo endotraqueal: (Edad/4) + 4 mm</li>
                   <li>• Profundidad inserción: Edad/2 + 12 cm (a nivel labios)</li>
@@ -323,7 +355,7 @@ export function EmergenciaMedico({ onGoBack }: EmergenciaMedicoProps) {
               </div>
 
               <div className="bg-blue-50 p-6 rounded-xl border-2 border-blue-200">
-                <h3 className="text-blue-600 mb-3">Acceso Venoso</h3>
+                <h3 className="text-blue-600 mb-3 font-bold">Acceso Venoso</h3>
                 <ul className="space-y-2 text-gray-700">
                   <li>• Primera opción: Vía periférica (antecubital, mano)</li>
                   <li>• Si falla en 90 seg: Vía intraósea</li>
@@ -333,7 +365,7 @@ export function EmergenciaMedico({ onGoBack }: EmergenciaMedicoProps) {
               </div>
 
               <div className="bg-blue-50 p-6 rounded-xl border-2 border-blue-200">
-                <h3 className="text-blue-600 mb-3">Ventilación a Presión Positiva</h3>
+                <h3 className="text-blue-600 mb-3 font-bold">Ventilación a Presión Positiva</h3>
                 <ul className="space-y-2 text-gray-700">
                   <li>• Frecuencia: 20-30 respiraciones/min</li>
                   <li>• Volumen: elevar tórax visiblemente</li>

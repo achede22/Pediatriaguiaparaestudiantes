@@ -1,12 +1,12 @@
 import { useState } from 'react';
 import { motion } from 'motion/react';
-import { ArrowLeft, Stethoscope, Search, Database, Calculator, GitBranch, FileText, Camera } from 'lucide-react';
+import { ArrowLeft, Search, Database, Calculator, GitBranch, BookOpen } from 'lucide-react';
 
 interface NoEmergenciaMedicoProps {
   onGoBack: () => void;
 }
 
-type Section = 'main' | 'entrevista' | 'diagnostico' | 'base-datos' | 'calculadoras' | 'algoritmos';
+type Section = 'main' | 'diagnostico' | 'base-datos' | 'calculadoras' | 'algoritmos';
 
 export function NoEmergenciaMedico({ onGoBack }: NoEmergenciaMedicoProps) {
   const [section, setSection] = useState<Section>('main');
@@ -23,8 +23,7 @@ export function NoEmergenciaMedico({ onGoBack }: NoEmergenciaMedicoProps) {
 
   const calcularResultado = () => {
     const peso = parseFloat(pesoKg);
-    const edad = parseFloat(edadAnios);
-    
+
     if (selectedCalculadora === 'liquidos' && peso) {
       let ml = 0;
       if (peso <= 10) {
@@ -36,7 +35,7 @@ export function NoEmergenciaMedico({ onGoBack }: NoEmergenciaMedicoProps) {
       }
       return `${ml} ml/día (${(ml / 24).toFixed(1)} ml/hora)`;
     }
-    
+
     if (selectedCalculadora === 'superficie' && peso) {
       const altura = 100; // Valor de ejemplo, debería ser input
       const sc = Math.sqrt((peso * altura) / 3600);
@@ -72,9 +71,9 @@ export function NoEmergenciaMedico({ onGoBack }: NoEmergenciaMedicoProps) {
             </button>
             <div className="flex-1">
               <h1 className="text-white">Consulta General</h1>
-              <p className="text-blue-100">Modo Médico - Herramientas Completas</p>
+              <p className="text-blue-100">Herramientas de Referencia</p>
             </div>
-            <Stethoscope className="w-12 h-12" />
+            <BookOpen className="w-12 h-12" />
           </div>
         </div>
 
@@ -84,21 +83,6 @@ export function NoEmergenciaMedico({ onGoBack }: NoEmergenciaMedicoProps) {
             animate={{ opacity: 1 }}
             className="space-y-4"
           >
-            {/* Entrevista inicial */}
-            <button
-              onClick={() => setSection('entrevista')}
-              className="w-full bg-white p-6 rounded-2xl shadow-lg hover:shadow-xl active:scale-98 transition-all
-                       border-2 border-blue-200 hover:border-blue-400 flex items-center gap-4"
-            >
-              <div className="w-16 h-16 bg-blue-100 rounded-xl flex items-center justify-center">
-                <FileText className="w-8 h-8 text-blue-600" />
-              </div>
-              <div className="flex-1 text-left">
-                <h3 className="text-blue-600">Entrevista Inicial Avanzada</h3>
-                <p className="text-gray-600">Antecedentes, signos vitales, escala de dolor</p>
-              </div>
-            </button>
-
             {/* Descarte de enfermedades */}
             <button
               onClick={() => setSection('diagnostico')}
@@ -109,8 +93,8 @@ export function NoEmergenciaMedico({ onGoBack }: NoEmergenciaMedicoProps) {
                 <Search className="w-8 h-8 text-purple-600" />
               </div>
               <div className="flex-1 text-left">
-                <h3 className="text-purple-600">Descarte de Enfermedades</h3>
-                <p className="text-gray-600">Búsqueda por síntomas, diagnóstico diferencial</p>
+                <h3 className="text-purple-600">Guía de Enfermedades</h3>
+                <p className="text-gray-600">Búsqueda por síntomas y diagnóstico diferencial</p>
               </div>
             </button>
 
@@ -124,8 +108,8 @@ export function NoEmergenciaMedico({ onGoBack }: NoEmergenciaMedicoProps) {
                 <Database className="w-8 h-8 text-green-600" />
               </div>
               <div className="flex-1 text-left">
-                <h3 className="text-green-600">Base de Datos Offline</h3>
-                <p className="text-gray-600">Enfermedades, drogas, guías de práctica clínica</p>
+                <h3 className="text-green-600">Vademécum y Guías</h3>
+                <p className="text-gray-600">Drogas, dosis y protocolos actualizados</p>
               </div>
             </button>
 
@@ -154,140 +138,11 @@ export function NoEmergenciaMedico({ onGoBack }: NoEmergenciaMedicoProps) {
                 <GitBranch className="w-8 h-8 text-indigo-600" />
               </div>
               <div className="flex-1 text-left">
-                <h3 className="text-indigo-600">Algoritmos Interactivos</h3>
-                <p className="text-gray-600">Cardiovascular, respiratorio, neurológico</p>
+                <h3 className="text-indigo-600">Algoritmos Clínicos</h3>
+                <p className="text-gray-600">Manejo de patologías comunes</p>
               </div>
             </button>
           </motion.div>
-        )}
-
-        {section === 'entrevista' && (
-          <div className="bg-white rounded-2xl p-6 shadow-xl">
-            <div className="flex items-center gap-4 mb-6">
-              <button
-                onClick={() => setSection('main')}
-                className="p-3 bg-gray-100 hover:bg-gray-200 rounded-xl active:scale-95 transition-all"
-              >
-                <ArrowLeft className="w-6 h-6" />
-              </button>
-              <h2 className="flex-1 text-blue-600">Entrevista Inicial</h2>
-            </div>
-
-            <div className="space-y-6">
-              {/* Datos del paciente */}
-              <div className="bg-blue-50 p-6 rounded-xl border-2 border-blue-200">
-                <h3 className="text-blue-600 mb-4">Datos del Paciente</h3>
-                <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-                  <div>
-                    <label className="block mb-2 text-gray-700">Nombre completo</label>
-                    <input type="text" className="w-full p-3 border-2 border-gray-300 rounded-lg focus:border-blue-500 focus:outline-none" />
-                  </div>
-                  <div>
-                    <label className="block mb-2 text-gray-700">Edad</label>
-                    <input type="number" className="w-full p-3 border-2 border-gray-300 rounded-lg focus:border-blue-500 focus:outline-none" />
-                  </div>
-                  <div>
-                    <label className="block mb-2 text-gray-700">Peso (kg)</label>
-                    <input type="number" className="w-full p-3 border-2 border-gray-300 rounded-lg focus:border-blue-500 focus:outline-none" />
-                  </div>
-                  <div>
-                    <label className="block mb-2 text-gray-700">Altura (cm)</label>
-                    <input type="number" className="w-full p-3 border-2 border-gray-300 rounded-lg focus:border-blue-500 focus:outline-none" />
-                  </div>
-                </div>
-              </div>
-
-              {/* Signos vitales */}
-              <div className="bg-green-50 p-6 rounded-xl border-2 border-green-200">
-                <h3 className="text-green-600 mb-4">Signos Vitales</h3>
-                <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-                  <div>
-                    <label className="block mb-2 text-gray-700">Frecuencia cardíaca (lpm)</label>
-                    <input type="number" className="w-full p-3 border-2 border-gray-300 rounded-lg focus:border-green-500 focus:outline-none" />
-                  </div>
-                  <div>
-                    <label className="block mb-2 text-gray-700">Frecuencia respiratoria (rpm)</label>
-                    <input type="number" className="w-full p-3 border-2 border-gray-300 rounded-lg focus:border-green-500 focus:outline-none" />
-                  </div>
-                  <div>
-                    <label className="block mb-2 text-gray-700">Presión arterial (mmHg)</label>
-                    <input type="text" placeholder="120/80" className="w-full p-3 border-2 border-gray-300 rounded-lg focus:border-green-500 focus:outline-none" />
-                  </div>
-                  <div>
-                    <label className="block mb-2 text-gray-700">Temperatura (°C)</label>
-                    <input type="number" step="0.1" className="w-full p-3 border-2 border-gray-300 rounded-lg focus:border-green-500 focus:outline-none" />
-                  </div>
-                  <div>
-                    <label className="block mb-2 text-gray-700">Saturación O₂ (%)</label>
-                    <input type="number" className="w-full p-3 border-2 border-gray-300 rounded-lg focus:border-green-500 focus:outline-none" />
-                  </div>
-                </div>
-              </div>
-
-              {/* Escala de dolor */}
-              <div className="bg-purple-50 p-6 rounded-xl border-2 border-purple-200">
-                <h3 className="text-purple-600 mb-4">Escala de Dolor Pediátrico</h3>
-                <div className="flex justify-between mb-3">
-                  {[0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10].map((num) => (
-                    <button
-                      key={num}
-                      className={`w-12 h-12 rounded-lg border-2 transition-all hover:scale-110 active:scale-95
-                        ${num <= 3 ? 'border-green-400 hover:bg-green-100' : 
-                          num <= 6 ? 'border-yellow-400 hover:bg-yellow-100' : 
-                          'border-red-400 hover:bg-red-100'}`}
-                    >
-                      {num}
-                    </button>
-                  ))}
-                </div>
-                <p className="text-gray-600">0 = Sin dolor | 10 = Dolor máximo</p>
-              </div>
-
-              {/* Motivo de consulta */}
-              <div className="bg-orange-50 p-6 rounded-xl border-2 border-orange-200">
-                <h3 className="text-orange-600 mb-4">Motivo de Consulta</h3>
-                <textarea
-                  className="w-full p-4 border-2 border-gray-300 rounded-lg focus:border-orange-500 focus:outline-none"
-                  rows={4}
-                  placeholder="Describa el motivo de la consulta..."
-                ></textarea>
-              </div>
-
-              {/* Antecedentes */}
-              <div className="bg-red-50 p-6 rounded-xl border-2 border-red-200">
-                <h3 className="text-red-600 mb-4">Antecedentes</h3>
-                <div className="space-y-3">
-                  <div>
-                    <label className="block mb-2 text-gray-700">Alergias</label>
-                    <input type="text" className="w-full p-3 border-2 border-gray-300 rounded-lg focus:border-red-500 focus:outline-none" />
-                  </div>
-                  <div>
-                    <label className="block mb-2 text-gray-700">Medicamentos actuales</label>
-                    <input type="text" className="w-full p-3 border-2 border-gray-300 rounded-lg focus:border-red-500 focus:outline-none" />
-                  </div>
-                  <div>
-                    <label className="block mb-2 text-gray-700">Enfermedades previas</label>
-                    <textarea className="w-full p-3 border-2 border-gray-300 rounded-lg focus:border-red-500 focus:outline-none" rows={3}></textarea>
-                  </div>
-                </div>
-              </div>
-
-              {/* Adjuntar fotos */}
-              <div className="bg-gray-50 p-6 rounded-xl border-2 border-gray-300">
-                <h3 className="text-gray-700 mb-4 flex items-center gap-2">
-                  <Camera className="w-6 h-6" />
-                  Adjuntar Fotos
-                </h3>
-                <button className="w-full p-6 border-2 border-dashed border-gray-400 rounded-xl hover:border-blue-500 hover:bg-blue-50 transition-all">
-                  <p className="text-gray-600">Click para seleccionar imágenes</p>
-                </button>
-              </div>
-
-              <button className="w-full py-4 bg-gradient-to-r from-blue-600 to-indigo-600 text-white rounded-xl shadow-lg hover:shadow-xl active:scale-98 transition-all">
-                Guardar Entrevista
-              </button>
-            </div>
-          </div>
         )}
 
         {section === 'diagnostico' && (
@@ -299,7 +154,7 @@ export function NoEmergenciaMedico({ onGoBack }: NoEmergenciaMedicoProps) {
               >
                 <ArrowLeft className="w-6 h-6" />
               </button>
-              <h2 className="flex-1 text-purple-600">Descarte de Enfermedades</h2>
+              <h2 className="flex-1 text-purple-600">Guía de Enfermedades</h2>
             </div>
 
             {/* Búsqueda por síntomas */}
@@ -333,9 +188,8 @@ export function NoEmergenciaMedico({ onGoBack }: NoEmergenciaMedicoProps) {
                       <h4 className="text-purple-900 mb-1">{enfermedad.nombre}</h4>
                       <p className="text-gray-600">Categoría: {enfermedad.categoria}</p>
                     </div>
-                    <span className={`px-4 py-2 rounded-lg ${
-                      enfermedad.prevalencia === 'Alta' ? 'bg-red-100 text-red-700' : 'bg-yellow-100 text-yellow-700'
-                    }`}>
+                    <span className={`px-4 py-2 rounded-lg ${enfermedad.prevalencia === 'Alta' ? 'bg-red-100 text-red-700' : 'bg-yellow-100 text-yellow-700'
+                      }`}>
                       {enfermedad.prevalencia}
                     </span>
                   </div>
@@ -354,7 +208,7 @@ export function NoEmergenciaMedico({ onGoBack }: NoEmergenciaMedicoProps) {
               >
                 <ArrowLeft className="w-6 h-6" />
               </button>
-              <h2 className="flex-1 text-green-600">Base de Datos Offline</h2>
+              <h2 className="flex-1 text-green-600">Vademécum y Guías</h2>
             </div>
 
             <div className="space-y-4">
@@ -384,7 +238,7 @@ export function NoEmergenciaMedico({ onGoBack }: NoEmergenciaMedicoProps) {
                     { nombre: 'Paracetamol', dosis: '10-15 mg/kg/dosis c/4-6h', presentacion: 'Suspensión 160mg/5ml' },
                   ].map((med, index) => (
                     <div key={index} className="p-4 bg-white rounded-lg border-2 border-gray-200">
-                      <h4 className="mb-2">{med.nombre}</h4>
+                      <h4 className="mb-2 font-bold">{med.nombre}</h4>
                       <p className="text-gray-600">Dosis: {med.dosis}</p>
                       <p className="text-gray-600">Presentación: {med.presentacion}</p>
                     </div>
@@ -409,7 +263,7 @@ export function NoEmergenciaMedico({ onGoBack }: NoEmergenciaMedicoProps) {
 
             {/* Datos del paciente */}
             <div className="bg-orange-50 p-6 rounded-xl border-2 border-orange-200 mb-6">
-              <h3 className="text-orange-600 mb-4">Datos del Paciente</h3>
+              <h3 className="text-orange-600 mb-4">Datos para Cálculo</h3>
               <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                 <div>
                   <label className="block mb-2 text-gray-700">Peso (kg)</label>
@@ -457,7 +311,7 @@ export function NoEmergenciaMedico({ onGoBack }: NoEmergenciaMedicoProps) {
             {selectedCalculadora && pesoKg && (
               <div className="bg-gradient-to-r from-orange-100 to-orange-50 p-6 rounded-xl border-2 border-orange-400">
                 <h3 className="text-orange-900 mb-3">Resultado:</h3>
-                <p className="text-orange-900">{calcularResultado()}</p>
+                <p className="text-orange-900 font-bold text-xl">{calcularResultado()}</p>
               </div>
             )}
           </div>
@@ -472,7 +326,7 @@ export function NoEmergenciaMedico({ onGoBack }: NoEmergenciaMedicoProps) {
               >
                 <ArrowLeft className="w-6 h-6" />
               </button>
-              <h2 className="flex-1 text-indigo-600">Algoritmos Interactivos</h2>
+              <h2 className="flex-1 text-indigo-600">Algoritmos Clínicos</h2>
             </div>
 
             <div className="space-y-4">

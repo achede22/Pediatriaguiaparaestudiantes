@@ -1,0 +1,814 @@
+Propuesta de proyecto: Desarrollo de una app para diagnóstico de enfermedades pediátricas
+ANDROID
+
+Diseño de la UI de "Pediatr-IA" en Figma (Guía para Paula)
+1. Bienvenida y Selección de Usuario
+2. Menú Principal (Médicos) verificar si es emergencia o no
+4. Sección de Descarte de Enfermedades
+5. Calculadoras Médicas (Solo para Médicos)
+7. Diseño General
+8. Prototipo en Figm
+Consejos adicionales para Paula
+
+Introducción
+En el contexto actual, es crucial contar con herramientas que faciliten el diagnóstico temprano de enfermedades pediátricas, especialmente en áreas remotas o con acceso limitado a servicios de salud especializados. Con el objetivo de abordar esta necesidad, proponemos el desarrollo de una app para Android que permita a estudiantes de pediatria o pediatras a realizar un descarte inicial de posibles enfermedades a partir de la descripción de síntomas, facilitando calculadoras y algoritmos interactivos.
+
+Objetivo
+Crear una app para Android que facilite el diagnóstico de enfermedades pediátricas a través de la descripción de síntomas, brindando información útil y orientando al usuario hacia la consulta médica en caso de sospecha de una condición grave.
+
+Cada texto debe tener un enlace a la fuente original, para confiabilidad.
+un pequeño banner en la parte de abajo de la app para Google Ads.
+
+App similares
+Pediadosis:
+/
+ Medscape
+Asociación española de pediatría, web. 
+DOSIS PEDIA
+
+
+Manual MSD pro, manual de Merk, la mejor app que hay, para médicos
+DTsEMT Drip Rate Calc
+ALGA- Gases Arteriales
+Drugs.com
+I.V. Fluids
+Infusion C
+
+
+Pediatr-IA : para Médicos
+
+
+
+	
+Funcionalidades Expandidas (Enfoque Médico)
+
+
+Entrevista inicial avanzada:
+
+
+Campos específicos para antecedentes relevantes (alergias, enfermedades crónicas, medicamentos).
+Escala de dolor pediátrico (p. ej., escala de Wong-Baker).
+Registro de signos vitales (frecuencia cardíaca, respiratoria, saturación de oxígeno).
+Opción de adjuntar fotos (p. ej., lesiones, erupciones).
+
+Descarte de enfermedades optimizado:
+
+
+Búsqueda rápida de síntomas por palabra clave.
+Visualización de enfermedades con mayor probabilidad según los síntomas ingresados.
+Acceso a información detallada de cada enfermedad (definición, síntomas, diagnóstico, tratamiento).
+
+
+Base de datos offline completa (para desarrollar despues):
+
+
+Información detallada de enfermedades (etiología, fisiopatología, cuadro clínico, diagnóstico diferencial, tratamiento).
+Lista de drogas con información específica para pediatría (dosis, presentación, contraindicaciones, interacciones).
+Guías de práctica clínica y protocolos actualizados.
+
+Calculadoras y fórmulas (prioridad):
+
+Todas las calculadoras mencionadas (Holiday-Segar, dosis pediátricas, etc.).
+Cálculo de concentraciones de hidrogeniones.
+Fórmulas de medicamentos (lidocaína, dopamina, adrenalina, potasio, nebulizaciones).
+Cálculo de dosis específicas (sulfato de magnesio, yopal, etc.).
+
+Algoritmos interactivos:
+
+
+Algoritmos de paro cardíaco, SCA, ACV, síndrome coronario agudo, arritmias, asma, etc.
+Visualización paso a paso del algoritmo, con opciones para seleccionar la respuesta del paciente y avanzar en el proceso.
+Acceso a información adicional sobre cada paso del algoritmo (p. ej., dosis de medicamentos, técnicas de reanimación).
+
+NO Gestión de pacientes:
+
+
+NO Lista de pacientes en turno o guardia.
+NO Registro de datos y seguimiento de cada paciente.
+NO Posibilidad de agregar notas y comentarios sobre la evolución del paciente.
+
+Acceso a recursos externos:
+
+
+Enlaces a guías de práctica clínica en línea.
+Acceso a bases de datos de medicamentos actualizadas COMO VADEMECUM ARGENTINA https://www.vademecum.es/argentina/ar/alfa
+
+Conexión con IA (opcional A FUTURO):
+
+
+
+EMERGENCIA : se abre el menú de algoritmos de emergencia 
+
+
+ La primera interacción en "Pediatr-IA" sea crucial para direccionar al usuario a la experiencia adecuada según la urgencia y su perfil (médico o no). 
+
+Me parece una excelente forma de optimizar la app y hacerla más eficiente.
+
+Te presento cómo podríamos estructurar esas cuatro experiencias y qué funcionalidades incluir en cada una:
+
+
+1. Emergencia - Soy Médico
+ * Objetivo: Brindar acceso rápido a herramientas críticas para la atención de emergencias pediátricas.
+ * Funcionalidades:*
+   * Algoritmos de emergencia:*
+     * Paro cardíaco (RCP pediátrica) (Listo)
+     * Anafilaxia (Listo)
+     * Crisis asmática grave (Listo)
+     * Convulsiones (Listo)
+     * Traumatismo craneoencefálico grave (Listo)
+   * Calculadoras de dosis de emergencia:*
+     * Adrenalina (Listo)
+     * Atropina (Listo)
+     * Bicarbonato (Listo)
+     * Lidocaína (Listo)
+     * Otros medicamentos de emergencia
+   * Guía rápida de procedimientos:*
+     * Intubación endotraqueal (Listo)
+     * Acceso venoso (Listo)
+     * Ventilación a presión positiva (Listo)
+   * Comunicación directa:*
+     * Botón de llamada rápida a servicios de emergencia (911 u otro número local)
+     * Opción de contactar a un colega o especialista (si está configurado)
+
+
+
+
+2. No es Emergencia 
+ * Objetivo: Brindar herramientas completas para la atención pediátrica general.
+ * Funcionalidades:*
+   * Entrevista inicial avanzada:*
+     * Antecedentes detallados
+     * Escala de dolor pediátrico
+     * Signos vitales
+     * Adjuntar fotos
+   * Descarte de enfermedades optimizado:*
+     * Búsqueda por síntomas
+     * Enfermedades más probables
+     * Información detallada de cada enfermedad
+   * Base de datos offline completa:*
+     * Enfermedades (etiología, cuadro clínico, diagnóstico, tratamiento)
+     * Drogas (dosis, presentación, contraindicaciones)
+     * Guías de práctica clínica
+   * Calculadoras y fórmulas:*
+     * Dosis pediátricas
+     * Líquidos
+     * Nutrición
+     * Otras
+   * Algoritmos interactivos:*
+     * Amplia variedad de algoritmos (cardiovasculares, respiratorios, etc.)
+
+     * Notas y comentarios
+
+
+
+Consideraciones adicionales
+ * Diseño UI/UX: Adaptar el diseño y el lenguaje de cada sección al público objetivo.
+ * Navegación: Permitir cambiar entre secciones (ej. de "No es emergencia" a "Emergencia") si la situación lo requiere.
+ * Integración: Asegurar que las funcionalidades estén integradas de forma coherente.
+
+
+
+Signos y síntomas es igual a semiología médica eso lleva al diagnóstico. El tratamiento depende de eso…
+
+
+Dr Alvaro dijo: quiero que la App te identifique al menos 4 o 5 diagnóstico diferenciales y que desarrolle: porque no son esas patología según libro y editorial y página.
+
+
+razonar Por qué NO es esta enfermedad , bibliografía , fuentes verificables
+
+Por que SI PUEDE ser esta enfermedad 
+, signos, síntomas, semiología, bibliografía
+Como se le detectó el Kawasaki a isabella 
+El. Dr Buscó en la app en “Enfermedades que causen editemas, 
+Dentro, la 4ta, 5ta, 6ta, 7ma enfermedad 
+
+Síntoma “Salpullido general”
+Síntomas “ fiebre”
+Síntoma “ conjuntivitis” 
+
+Dio como resultado : 7ma enfermedad, kawasaki
+
+
+
+
+Lista de calculadoras y fórmulas (organizadas por categorías):
+
+
+Cálculo de dosis:
+
+
+Amoxicilina (mg/kg, presentación en jarabe/suspensión)
+Amoxicilina/clavulánico (mg/kg, presentación en jarabe/suspensión)
+Cefalexina (mg/kg, presentación en jarabe/suspensión/cápsulas)
+Ibuprofeno (mg/kg, presentación en jarabe/suspensión/comprimidos)
+Paracetamol (mg/kg, presentación en jarabe/suspensión/comprimidos)
+Dosis de antibióticos específicos (azitromicina, claritromicina, etc.)
+Dosis de antivirales (oseltamivir, etc.)
+Dosis de corticoides (prednisona, dexametasona, etc.)
+Dosis de broncodilatadores (salbutamol, terbutalina, etc.)
+Dosis de adrenalina (en diferentes situaciones clínicas)
+Dosis de atropina
+Dosis de bicarbonato
+Dosis de calcio
+Dosis de digoxina
+Dosis de dopamina
+Dosis de epinefrina
+Dosis de lidocaína
+Dosis de naloxona
+Dosis de vasopresina
+Dosis de otros medicamentos pediátricos comunes
+Cálculo de dosis según peso, edad y/o superficie corporal
+Ajuste de dosis en insuficiencia renal o hepática
+
+
+Cálculo de líquidos:
+
+
+Holliday-Segar (requerimientos de líquidos de mantenimiento) (Listo)
+Cálculo de líquidos para hidratación (según grado de deshidratación: leve, moderada, grave)
+Cálculo de goteo de soluciones (gotas/minuto)
+Cálculo de volumen de infusión
+adren, amiodarona
+atropina, procainamida
+adrenalina, dopamina, lidocaina
+digox, verapam, diltiazem mg
+Cálculo de pérdidas de líquidos (diarrea, vómitos, etc.)
+
+Evaluación nutricional:
+
+
+Índice de masa corporal (IMC) (con tablas de percentiles) (Listo)
+Percentiles de crecimiento (peso y talla)
+Requerimientos calóricos (basal y total)
+Cálculo de gasto energético
+Evaluación del estado nutricional (desnutrición, obesidad)
+
+Otros cálculos:
+
+
+Cálculo de la fracción de eyección
+Cálculo del puntaje de Apgar
+Cálculo de la edad corregida en prematuros
+
+Interfaz intuitiva (detalles):
+
+
+Diseño limpio y sin distracciones, con enfoque en la tarea.
+Campos de entrada con etiquetas claras y unidades especificadas.
+Validación de datos con mensajes de error descriptivos.
+Botón de "Calcular" destacado y fácil de ubicar.
+Resultados claros y concisos, con unidades y explicaciones si es necesario.
+Opción de guardar o imprimir los resultados para el registro del paciente.
+
+
+
+
+Sección de "Algoritmos" (Detalle Completo)
+Lista de algoritmos (organizados por categorías):
+
+
+Cardiovasculares:
+
+
+Paro cardíaco (algoritmo de RCP pediátrica)
+Síndrome coronario agudo (diagnóstico y tratamiento)
+Arritmias (taquicardia supraventricular, fibrilación auricular, etc.)
+Bradicardia
+Bloqueo AV
+
+Respiratorios:
+
+
+Asma aguda (tratamiento en urgencias)
+Insuficiencia respiratoria (manejo y ventilación mecánica)
+Croup (laringotraqueítis)
+Bronquiolitis
+
+Neurológicos:
+
+
+Accidente cerebrovascular (ACV) (diagnóstico y tratamiento)
+Convulsiones (manejo en niños)
+Estado epiléptico
+Meningitis
+
+Infecciones:
+
+
+Sepsis
+Meningitis
+Neumonía (Listo)
+Infección urinaria (Listo)
+
+Traumatismos:
+
+
+Traumatismo craneoencefálico (TCE)
+Trauma abdominal
+Quemaduras
+
+Otros:
+
+
+Anafilaxia
+Cetoacidosis diabética
+Intoxicaciones
+PARTOGRAMA
+
+Interfaz interactiva (detalles):
+
+
+Flujo del algoritmo con diagrama claro y pasos numerados.
+Opciones de respuesta a preguntas o situaciones clínicas.
+Navegación sencilla con botones para avanzar y retroceder.
+Información adicional al seleccionar una opción (dosis, técnicas, etc.).
+Alertas para pasos críticos o decisiones importantes.
+Visualización adaptable a diferentes pantallas.
+
+
+Sección de "Base de datos":
+
+
+Búsqueda rápida por palabra clave.
+Visualización clara de la información de cada enfermedad o medicamento.
+
+Diseño general:
+
+
+Colores sobrios y profesionales (p. ej., tonos de azul y gris).
+Tipografía legible y clara.
+Diseño adaptable a diferentes tamaños de pantalla (tabletas, smartphones).
+
+
+Público objetivo
+
+Médicos: Como herramienta de apoyo para el diagnóstico inicial y la triaje de pacientes.
+Ventajas competitivas
+
+Disponibilidad offline: Funciona en gran medida sin conexión a Internet, lo que la hace útil en áreas remotas.
+
+Interfaz intuitiva: Diseño fácil de usar y navegación clara para un uso rápido y eficiente.
+
+Información confiable: Base de datos actualizada y verificada por profesionales médicos.
+
+Orientación médica: Siempre enfatiza la importancia de consultar a un médico para un diagnóstico y tratamiento adecuados.
+
+Plan de desarrollo
+
+Investigación y recopilación de datos: Recopilación de información sobre enfermedades pediátricas, síntomas y tratamientos.
+
+Diseño de la interfaz de usuario (UI): Creación de un diseño intuitivo y atractivo que facilite la navegación y la interacción.
+
+Desarrollo del backend: Implementación de la lógica de descarte de enfermedades y la base de datos (despues de las calculadoras y algoritmos interactivos).
+
+Integración de la IA: (Opcional) Conexión a una IA para brindar recomendaciones adicionales.
+
+Pruebas y depuración: Realización de pruebas exhaustivas para garantizar el correcto funcionamiento y la estabilidad de la app.
+
+Lanzamiento y promoción: Publicación de la app en la Play Store y promoción a través de 
+diferentes canales.
+
+
+
+
+Experiencia previa y base para el desarrollo
+
+El Dr. Hernán, médico general y traumatólogo con amplia trayectoria, ha desarrollado a lo largo de su carrera una serie de herramientas prácticas en formato de hojas de cálculo de Excel para facilitar su trabajo diario. Estas hojas abarcan diversas áreas de la pediatría y han demostrado ser de gran utilidad para el cálculo de dosis, preparación de soluciones, manejo de infecciones y más.
+
+Entre las hojas de cálculo más destacadas se encuentran:
+
+Método de Holiday-Segar: Para el cálculo de la superficie corporal en niños.
+
+Mezcla de solución fisiológica: Para determinar la cantidad adecuada de solución salina en lavados nasales.
+
+Cálculo de insulina: Para ajustar la dosis de insulina en pacientes pediátricos.
+
+Cálculo nutricional: Para evaluar el estado nutricional y requerimientos de niños.
+
+Cuadros ácido-base: Para analizar y comprender los trastornos ácido-base en niños.
+
+Cálculo de dosis pediátricas: Para determinar la dosis segura y efectiva de medicamentos en niños.
+
+Mezcla de soluciones celulares: Para la preparación de soluciones utilizadas en terapias celulares.
+
+Infecciones, bacterias y antibióticos: Para facilitar la selección del antibiótico adecuado según la infección y el microorganismo involucrado.
+
+La experiencia y el conocimiento plasmados en estas hojas de cálculo representan una base sólida y valiosa para el desarrollo de la app "Pediatr-IA". La lógica y los algoritmos utilizados en las hojas de cálculo pueden ser adaptados y optimizados para su implementación en la app, garantizando la precisión y confiabilidad de los resultados.
+
+Además, contar con la experiencia del Dr. Hernán en el diseño y validación de estas herramientas asegura que la app cumpla con las necesidades reales de los profesionales de la salud y que sea una herramienta útil y práctica en su día a día.
+
+
+muchas veces, en esos documentos de excel, el texto en AZUL es el input, la celda donde se escribe para que las otras cambien el resultado a mostrar. chren VERDE , las celdas con resultados, con formulas
+
+
+
+Diseño de la UI de "Pediatr-IA" en Figma
+
+El Doctor hernan tiene un respaldo de documentos que son la fuente de informacion para el desarrollo de la app, mas NO es la referencia final que debe tener cada item, la referencia o fuente tiene que ser online en paginas confiables., yo puedo ir compartiendo esta información y estos PDF mientras desarrollamos la app, podemos ir modificando el documento "tree.txt" para ir marcando lo que ya se cargó a la app
+
+
+
+
+---
+Cuentas de Instagram con informacion de pediatria
+Pediatra Mel
+Mama y Pediatra
+Doctora Carla Osin
+
+
+
+
+
+
+❯ tree
+.
+├── 0100000079_13_Desnutricion.pdf
+├── 9219c257-c1fb-4f40-92b7-dcb4220c4a42 DEFUNCION CORREGIDA.pdf
+├── ACV
+│   ├── ACV TRATAMIENTO DE LA HIPERTENSION.jpg
+│   ├── ACV Y DIABETES NITROPRUSIATO.jpg
+│   ├── ACV.pdf
+│   ├── ALGORITMOS ACV.jpg
+│   ├── INCLUSION Y EXCLUSION ACV.jpg
+│   ├── NITROPRUSIATO SODICO NITROGLICERINA.jpg
+│   ├── NITROPRUSIATO-LABETALOL de infusiones y medicamentos gotas.xlsx
+│   ├── SEDACION REMISION.jpg
+│   └── nihss.pdf
+├── Algoritmos_en_urgencias.pdf
+├── C-04-05-A-010, V2.0 Estándar días de incapacidad (1).xlsx
+├── Cardio
+│   ├── ALGORITMO DE PARO.jpg
+│   ├── ALGORITMO DE SINDROME CORONARIO AGUDO.jpg
+│   ├── ANTIHIPERTENSIVOS
+│   │   ├── ANTIHIPERTENSIVOS.docx
+│   │   ├── ANTIHIPERTENSIVOS.pdf
+│   │   ├── hta hnsc ec.pdf
+│   │   └── hta hnsc ec.pptx
+│   ├── Anti isquemico.docx
+│   ├── Antiarritmicos
+│   │   ├── ANTIARRITMICOS.pdf
+│   │   ├── Arritmia inestable TTO.jpg
+│   │   ├── IMG_20190420_154708.jpg
+│   │   ├── arritmia algoritmo.jpg
+│   │   ├── arritmia extrasistole lidocaina.jpg
+│   │   └── arritmia fibril auric amiodarona.jpg
+│   ├── BRADICARDIA CON PULSO.jpg
+│   ├── Bradicardia tto.jpg
+│   ├── DOLOR PRECORDIAL DETALLES via oral.jpg
+│   ├── DOLOR PRECORDIAL INDICACIONES ASA.jpg
+│   ├── DOSIS DETALLE ALGORITMOS DE PARO.jpg
+│   ├── Dolor toraxico 2.png
+│   ├── Dolor toraxico.png
+│   ├── IM LABORATORIO 2.jpg
+│   ├── IM LABORATORIO.jpg
+│   ├── INFARTO AGUDO MIOCARDIO DETALLES via oral.jpg
+│   ├── LIDOCAINA DOPAMINA ADRENALINA Formulas de infusiones y medicamentos gotas.xlsx
+│   ├── LISTA DE COMPROBACION FIBRINOLITICOS IMEST.jpg
+│   ├── NITROPRUSIATO SODICO NITROGLICERINA-1.jpg
+│   ├── NOTA IMCESST.jpg
+│   ├── PARO CARDIACO.jpg
+│   ├── POST PARO.jpg
+│   ├── SEDACION REMISION.jpg
+│   ├── SEMAFORIZACIÓN CARRO DE PARO.xlsx
+│   ├── TAQUICARDIA CON PULSO.jpg
+│   ├── TRATAMIENTO FIBRINOLITICOS IMEST.jpg
+│   ├── antisquemico mas metoprolol.jpg
+│   ├── ecg
+│   │   ├── HVI.jpg
+│   │   ├── Interpretación básica ECG.docx
+│   │   ├── Rythm-Strip.jpg
+│   │   ├── ecg.pdf
+│   │   ├── ekg_complex_es-svg.png
+│   │   ├── images.jpg
+│   │   ├── luq.jpg
+│   │   └── triangulo de Einthoven.jpg
+│   ├── falla cardiaca derecha.pdf
+│   ├── hta hnsc ec.pdf
+│   ├── hta hnsc ec.pptx
+│   ├── nitroglicerina.jpg
+│   └── timi killip
+│       ├── CLASIFICACION TIMI.xlsx
+│       ├── killip 1.png
+│       └── killip 2.png
+├── DIABETES
+│   ├── ACID BASE NOMOGRAM.jpg
+│   ├── COMO SE AJUSTA LA INSULINA EN DOMICILIO.pdf
+│   ├── CUESTIONARIO 1.docx
+│   ├── CUESTIONARIO 2 DIABETES.docx
+│   ├── Como_ajustar 70-30.pdf
+│   ├── Copia de Cálculo de Insulina K+ MEJORADO.xlsx
+│   ├── Copia de cambio_dolar_peso_bolivar 19 11 2023.xlsx
+│   ├── Copia de cambio_dolar_peso_bolivar 24 08 2023.xlsx
+│   ├── Copia de cambio_dolar_peso_bolivar.xlsx
+│   ├── Cálculo de Insulina K+.xlsx
+│   ├── Diabetes y embarazo
+│   │   ├── nutricion y diabetes embarazo-1.jpg
+│   │   └── nutricion y diabetes embarazo.jpg
+│   ├── ESQUEMA MOVIL DE INSULINA CRISTALINA.jpg
+│   ├── HIPOGLICEMIANTES ORALES NPH.docx
+│   ├── HIPOGLICEMIANTES ORALES.pdf
+│   ├── Humalog_Mix5050_Informacion_de_prescripcion.pdf
+│   ├── Indicaciones Cetoacidosis hiperosmolar.docx
+│   ├── Insulina Rapida-Lenta.jpg
+│   ├── cambio dolar peso bolivar.xlsx
+│   ├── cetoacidosis.png
+│   ├── cetoacidosis_1.jpg
+│   ├── correccion de Insulina.png
+│   ├── corrección glicemia 2.png
+│   ├── cuadros acido base
+│   │   ├── Acido Base Equilibrio.pdf
+│   │   ├── MIXTO acidosis respiratoria con alcalosis metabolica.jpg
+│   │   ├── Screenshot_2018-10-30-15-52-01.png
+│   │   ├── alcalosis acidosis.png
+│   │   ├── calculo concentracion hidrogeniones.png
+│   │   ├── cuadro resumen alcalosis acidosis.png
+│   │   ├── laboratorio anion gap.jpg
+│   │   ├── laboratorio trastornos mixtos.jpg
+│   │   ├── prediccion de compensacion.jpg
+│   │   ├── pregunta de examen.jpg
+│   │   ├── tetania post acidotica.jpg
+│   │   ├── tipo de trastorno y componente.jpg
+│   │   ├── trastorno mixto acidosis compensada.png
+│   │   ├── trastornos mixtos.jpg
+│   │   ├── trastornos-mixtos-cido-base-10-638.jpg
+│   │   ├── trastornos-mixtos-cido-base-15-638.jpg
+│   │   ├── trastornos-mixtos-cido-base-17-638.jpg
+│   │   ├── trastornos-mixtos-cido-base-18-638.jpg
+│   │   ├── trastornos-mixtos-cido-base-19-638.jpg
+│   │   ├── trastornos-mixtos-cido-base-24-638.jpg
+│   │   ├── trastornos-mixtos-cido-base-25-638.jpg
+│   │   ├── trastornos-mixtos-cido-base-26-638.jpg
+│   │   ├── trastornos-mixtos-cido-base-27-638.jpg
+│   │   ├── trastornos-mixtos-cido-base-28-638.jpg
+│   │   ├── trastornos-mixtos-cido-base-29-638.jpg
+│   │   ├── trastornos-mixtos-cido-base-30-638.jpg
+│   │   ├── trastornos-mixtos-cido-base-31-638.jpg
+│   │   ├── trastornos-mixtos-cido-base-32-638.jpg
+│   │   ├── trastornos-mixtos-cido-base-35-638.jpg
+│   │   ├── trastornos-mixtos-cido-base-36-638.jpg
+│   │   ├── trastornos-mixtos-cido-base-37-638.jpg
+│   │   ├── trastornos-mixtos-cido-base-7-638.jpg
+│   │   ├── trastornos-mixtos-cido-base-8-638.jpg
+│   │   ├── trastornos-mixtos-cido-base-9-638.jpg
+│   │   └── valores normales gasometria.jpg
+│   ├── cálculo nutricional.xlsx
+│   ├── diabetes tipo 1.jpg
+│   ├── insulinas.png
+│   ├── ~$Copia de cambio_dolar_peso_bolivar 19 11 2023.xlsx
+│   ├── ~$cambio dolar peso bolivar.xlsx
+│   ├── ~WRL1380.tmp
+│   └── ~WRL2187.tmp
+├── DIAGNOSTICOS.xlsx
+├── EBPOC TRATAMIENTO
+│   ├── BODE INDEX.png
+│   ├── Broncodilatadores.jpg
+│   ├── DETALLES DIFICULTAD RESPIRATORIA.jpg
+│   ├── EBOC Gold .png
+│   ├── EBOC clasificacion.png
+│   ├── INSUF RESPIRATORIO DETALLE DOSIS.jpg
+│   ├── LAMA-LABA terbutalina.png
+│   ├── alcalosis acidosis.png
+│   ├── antibioticos alternativas.png
+│   ├── brocodilatadores puff.png
+│   ├── ebpoc detalles.jpg
+│   ├── evaluacion CAT-EBOC.png
+│   ├── oxigenoterapia O2WEB.pdf
+│   ├── tratamiento segun grupo.png
+│   ├── tto ebpoc detalles 2.jpg
+│   ├── tto insuf ebpoc RESPIRATORIO.jpg
+│   └── venturi.png
+├── EPILEPSIA
+│   ├── ANTIEPILEPTICOS.xlsx
+│   ├── antiepilepticos.png
+│   └── ~$ANTIEPILEPTICOS.xlsx
+├── Formulas de infusiones y medicamentos gotas.xlsx
+├── GASTRO
+│   └── HEMORRAGIA DIGESTIVA ALTA.xlsx
+├── GLASGOW.jpg
+├── GUIA_MEDICA_de_Bolsillo con graficos.pdf
+├── LINK MEDICAMENTOS POS.docx
+├── LINK MEDICINA LEGAL.docx
+├── Medicina de Urgencias y Emergencias. Jimenez Murillo 5a_booksmedicos.org.pdf
+├── NINOS
+│   ├── 113_Desnutrición aguda, moderada y severa en menores de 5 años_2019 + DATOS BASICOS.pdf
+│   ├── ACETILCISTEINA NINOS.jpg
+│   ├── DESNUTRICION AGUDA PE XII 2022.pdf
+│   ├── DOSIS PEDIATRICA - YOPAL.xlsx
+│   ├── Desnutrición en menores F113.pdf
+│   ├── FB836E10
+│   ├── GEMELAS INDIGENAS PAÑALITIS BAJO PESO AL NACER HECHOS.docx
+│   ├── Hoja de Cálculo para Dosis Pediátricas.xls
+│   ├── Maduracion Pulmonar
+│   │   └── Maduracion Pulmonar.jpg
+│   ├── RptHistoria REMISION POR DESNUTRICION Y GASTROENTERITIS 27 11 2023.pdf
+│   ├── diarrea en niños.docx
+│   ├── dosis ninos Y YOPAL INTEGRADO.xlsx
+│   ├── dosis ninos.xlsx
+│   ├── ictericia neonatal
+│   │   ├── Guardado con Autorrecuperación de 13 07 20 TELEFONICA  ANDRES FELIPE MORENO  INFANTE  INFANCIA.asd.docx
+│   │   ├── IMG_20170814_081153.jpg
+│   │   ├── IMG_20170814_081242.jpg
+│   │   ├── IMG_20170814_081412.jpg
+│   │   └── IMG_20170814_081524.jpg
+│   ├── metodo holliday segar.xls
+│   ├── peso talla edad.jpg
+│   ├── refiera niños.pdf
+│   ├── respiratorio niños
+│   │   ├── Asma
+│   │   │   ├── Asma Clasificacion.png
+│   │   │   ├── Asma Clinica.png
+│   │   │   ├── Asma Tratamiento.png
+│   │   │   ├── Asma clasificacion2.png
+│   │   │   ├── Asma concepto.png
+│   │   │   ├── Escala  Bierman.png
+│   │   │   └── algoritmo asma niños.jpg
+│   │   ├── Bierman-Pearson-Tal.png
+│   │   ├── Croup
+│   │   │   ├── Croup etiologia.png
+│   │   │   ├── Croup fisiopatologia.png
+│   │   │   ├── Croup sindrome.png
+│   │   │   ├── Croup tratamiento.png
+│   │   │   ├── Croup viral LTB.png
+│   │   │   ├── Laringitis aguda.png
+│   │   │   ├── Laringo Traqueo Bronquitis.png
+│   │   │   └── Westley Score.png
+│   │   ├── Epoglotitis
+│   │   │   ├── Screenshot_2018-11-03-12-24-20.png
+│   │   │   ├── Screenshot_2018-11-03-12-24-37.png
+│   │   │   ├── Screenshot_2018-11-03-12-25-35.png
+│   │   │   ├── Screenshot_2018-11-03-12-26-15.png
+│   │   │   ├── Screenshot_2018-11-03-12-26-50.png
+│   │   │   └── Screenshot_2018-11-03-12-30-35.png
+│   │   ├── FORMULA MEZCLAS NEBULIZACION 3 POR CIENTO.xlsx
+│   │   ├── Westley score.png
+│   │   ├── bronquiolitis total.jpg
+│   │   ├── fc y fr niños.jpg
+│   │   ├── frecuencia x edad.jpg
+│   │   ├── fármacos inhaladores.png
+│   │   ├── laringomalasia
+│   │   │   ├── laringomalasia.png
+│   │   │   └── laringomalasia2.png
+│   │   ├── mezcla de soluciones celular.xlsx
+│   │   ├── mis apuntes resp. niños
+│   │   │   ├── Asma Epiglotitis.jpg
+│   │   │   ├── laringitis traqueitis resf comun.jpg
+│   │   │   ├── mononucleosis OMA.jpg
+│   │   │   └── neumonia crup.jpg
+│   │   ├── neumon intrahosp pseudomona klebsiella tto ceftacidima.png
+│   │   ├── neumonia intrahospitalaria.png
+│   │   ├── preguntas examen
+│   │   │   ├── Screenshot_2018-11-03-12-42-54.png
+│   │   │   ├── Screenshot_2018-11-03-12-44-01.png
+│   │   │   ├── Screenshot_2018-11-03-12-45-02.png
+│   │   │   ├── Screenshot_2018-11-03-12-45-18.png
+│   │   │   ├── Screenshot_2018-11-03-12-47-43.png
+│   │   │   ├── Screenshot_2018-11-03-12-53-09.png
+│   │   │   ├── Screenshot_2018-11-03-13-07-02.png
+│   │   │   ├── Screenshot_2018-11-03-13-11-16.png
+│   │   │   ├── Screenshot_2018-11-03-17-15-02.png
+│   │   │   ├── Screenshot_2018-11-03-17-15-26.png
+│   │   │   ├── Screenshot_2018-11-03-17-16-01.png
+│   │   │   └── Screenshot_2018-11-03-17-16-41.png
+│   │   ├── respiratorio niño 20 kg.jpg
+│   │   ├── resumen era.pdf
+│   │   └── traqueitis bacteriana (croup pseudomembranoso)
+│   │       ├── Screenshot_2018-11-03-12-34-33.png
+│   │       └── Screenshot_2018-11-03-12-35-15.png
+│   ├── vacunaciones
+│   │   └── IMG_20170815_122240.jpg
+│   ├── ~$DOSIS PEDIATRICA - YOPAL.xlsx
+│   ├── ~$dosis ninos Y YOPAL INTEGRADO.xlsx
+│   ├── ~$dosis ninos.xlsx
+│   └── ~BROMIUM
+│       ├── 113_Desnutrición aguda, moderada y severa en menores de 5 años_2019 + DATOS BASICOS.pdf
+│       ├── DESNUTRICION AGUDA PE XII 2022.pdf
+│       ├── Desnutrición en menores F113.pdf
+│       └── RptHistoria REMISION POR DESNUTRICION Y GASTROENTERITIS 27 11 2023.pdf
+├── PEDIR SANGRE.jpg
+├── POTASIO
+│   ├── MANEJO DE POTASIO 2.jpg
+│   ├── MANEJO DEL POTASIO 3.jpg
+│   ├── MANEJO DEL POTASIO 4.jpg
+│   ├── MANEJO POTASIO.jpg
+│   ├── POTASIO Formulas de infusiones y medicamentos gotas MEJORADO.xlsx
+│   └── POTASIO Formulas de infusiones y medicamentos gotas.xlsx
+├── RABIA
+│   ├── 300_Agresiones por animales potencialmente transmisores de rabia_2019(1).pdf
+│   ├── FICHA AGRESIONES POR ANIMALES POTENCIALMENTE TRANSMOSORES DE RABIA CORRESPONDIZADO.doc
+│   ├── FICHA AGRESIONES POR ANIMALES POTENCIALMENTE TRANSMOSORES DE RABIA.doc
+│   ├── FICHA AGRESIONES POR ANIMALES POTENCIALMENTE TRANSMOSORES DE RABIA.pdf
+│   ├── IMG_20220516_165641.jpg
+│   ├── RABIA LINK.docx
+│   ├── guia-practica-atencion-agresiones.pdf
+│   ├── rabia esquema.jpg
+│   ├── ~BROMIUM
+│   │   └── 300_Agresiones por animales potencialmente transmisores de rabia_2019(1).pdf
+│   └── ~WRL3873.tmp
+├── RABIA.jpg
+├── REMISION ORTOPEDIA.jpg
+├── Resumen ACV sindromes coronarios.pdf
+├── SEDACION-INTUBACION
+│   ├── Midazolam Fentanil Rocuronio.jpg
+│   ├── NOTAS DE SEDACION.jpg
+│   ├── SEDACION REMISION.jpg
+│   ├── SEDACION-INTUBACION.xlsx
+│   ├── intubacion rapida.pdf
+│   ├── sedacion intubación.jpg
+│   └── ~$SEDACION-INTUBACION.xlsx
+├── TOXICOLOGIA
+│   ├── ANTIDOTOS Y TOXICOS cianuro.xlsx
+│   ├── ANTIDOTOS Y TOXICOS.xlsx
+│   ├── Acetaminofen Anticolinergicos.jpg
+│   ├── Antidotos D-L.jpg
+│   ├── Antídotos N-V.jpg
+│   ├── SÍNDROMES Y ANTIDOTOS.pdf
+│   ├── antidotos A-D.jpg
+│   ├── carbon activado.jpg
+│   ├── modulo8 intox acetaminofen.pdf
+│   ├── modulo8 intox acetaminofen.ppsx
+│   ├── ~$ANTIDOTOS Y TOXICOS cianuro.xlsx
+│   └── ~$ANTIDOTOS Y TOXICOS.xlsx
+├── TURNOS
+│   ├── ABRIL TURNOS Y TRASLADOS.xlsx
+│   ├── MARZO TURNOS Y TRASLADOS.xlsx
+│   └── TURNOS.xlsx
+├── VIOLENCIA SEXUAL
+│   ├── 01edb528-e8f4-1578-b369-12f9e731d501.pdf
+│   ├── CIL EVALUACION ATENCION INTEGRALVICTIMAS VIOLENCIA DE SEXUAL.docx
+│   ├── Circular _0030_de_2014_Violencia_Sexual.pdf
+│   ├── DELITO SEXUAL ULTIMA.pdf
+│   ├── FLUJOGRAMA DE ATENCION A VICTIMAS DE VIOLENCIA SEXUAL DEL PROGRAMA MANOS DE JUSTICIA.docx
+│   ├── Guía para el abordaje forense integral en la investigación de la violencia sexual.pdf
+│   ├── LINK MEDICINA LEGAL.docx
+│   ├── MODELO DE ATENCIÓN A VÍCTIMAS DE VIOLENCIA SEXUAL.pdf
+│   ├── REG_CAD_CUS (1).pdf
+│   ├── REG_CAD_CUS (3).pdf
+│   ├── REG_CAD_CUS (4).pdf
+│   ├── REG_CAD_CUS CUSTODIA.pdf
+│   ├── REG_CAD_CUS.pdf
+│   ├── RUTA VIOLENCIA SEXUAL COVE.ppt
+│   ├── RptHistoria VIOLENCIA SEXUAL SNEIDER.pdf
+│   ├── SOSPECHA DE ABUSO SEXUAL INFANTIL 16 03 2022 1.pdf
+│   ├── VIOLENCIA_SEXUAL_INTRAFAMILIAR.pdf
+│   ├── consentimiento2 (5).pdf
+│   ├── edad-dentaria.pdf
+│   ├── plantillaClinica (1) (1).pdf
+│   ├── plantillaClinica (1).pdf
+│   └── ~BROMIUM
+│       ├── 01edb528-e8f4-1578-b369-12f9e731d501.pdf
+│       ├── CIL EVALUACION ATENCION INTEGRALVICTIMAS VIOLENCIA DE SEXUAL.docx
+│       ├── Guía para el abordaje forense integral en la investigación de la violencia sexual.pdf
+│       ├── MODELO DE ATENCIÓN A VÍCTIMAS DE VIOLENCIA SEXUAL.pdf
+│       ├── REG_CAD_CUS (1).pdf
+│       ├── REG_CAD_CUS (3).pdf
+│       ├── REG_CAD_CUS (4).pdf
+│       ├── REG_CAD_CUS CUSTODIA.pdf
+│       ├── REG_CAD_CUS.pdf
+│       ├── RptHistoria VIOLENCIA SEXUAL SNEIDER.pdf
+│       ├── consentimiento2 (5).pdf
+│       ├── edad-dentaria.pdf
+│       ├── plantillaClinica (1) (1).pdf
+│       └── plantillaClinica (1).pdf
+├── defuncion formato ruaf.docx
+├── infusiones varias de Urgencias
+│   ├── Adren, Amiodarona.jpg
+│   ├── Atropina procainamida.jpg
+│   ├── adrenalina dopamina lidocaina.jpg
+│   └── digox verapam diltiazem SMg.jpg
+├── partograma
+│   ├── CODIGO ROJO.pptx
+│   ├── GUIA 1.  CONTROL PRENATAL Y FACTORES DE RIESGO.pdf
+│   ├── OBSERVACIONES OBSTETRICIA 360.docx
+│   ├── PARTOGRAMA DIGITAL
+│   │   ├── PARTOGRAMA EXEL BALLARD APGAR CAPURRO.xlsx
+│   │   ├── PARTOGRAMA EXEL BALLARD APGAR.xlsx
+│   │   ├── PARTOGRAMA EXEL DETALLES.xlsx
+│   │   ├── PARTOGRAMA EXEL.xlsx
+│   │   ├── partograma hora real 1.docx
+│   │   ├── ~$PARTOGRAMA EXEL BALLARD APGAR.xlsx
+│   │   ├── ~$PARTOGRAMA EXEL.xlsx
+│   │   ├── ~$rtograma hora real 1.docx
+│   │   └── ~WRL2743.tmp
+│   ├── PARTOGRAMA DIGITAL.xls
+│   ├── PARTOGRAMA.xlsx
+│   └── planos de hodge.jpg
+├── periodontal diseases 50 slides.pptx
+├── quemaduras
+│   ├── Screenshot_2017-03-23-19-40-19.png
+│   ├── Screenshot_2017-03-23-19-44-45.png
+│   ├── Screenshot_2017-03-23-19-47-48.png
+│   └── Screenshot_2017-03-23-19-57-39.png
+├── sulfato de magnesio ver dosis niños
+│   ├── IMG_20170221_224721.jpg
+│   ├── dosis ninos sulfato de magnesio asma y embarazo.xlsx
+│   ├── dosis sulf mag asma .jpg
+│   ├── infusiones tocolitico.jpg
+│   ├── tocolitico nifedipino.docx
+│   └── tocolitico nifedipino.pdf
+├── ~$DIAGNOSTICOS.xlsx
+└── ~BROMIUM
+    ├── GUIA_MEDICA_de_Bolsillo con graficos.pdf
+    └── Medicina de Urgencias y Emergencias. Jimenez Murillo 5a_booksmedicos.org.pdf
+
+
+

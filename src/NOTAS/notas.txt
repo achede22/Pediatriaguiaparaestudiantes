@@ -1,0 +1,418 @@
+Propuesta de proyecto: Desarrollo de una app para diagnóstico de enfermedades pediátricas
+ANDROID
+
+Diseño de la UI de "Pediatr-IA" en Figma (Guía para Paula)
+1. Bienvenida y Selección de Usuario
+2. Menú Principal (Médicos) verificar si es emergencia o no
+4. Sección de Descarte de Enfermedades
+5. Calculadoras Médicas (Solo para Médicos)
+7. Diseño General
+8. Prototipo en Figm
+Consejos adicionales para Paula
+
+Introducción
+En el contexto actual, es crucial contar con herramientas que faciliten el diagnóstico temprano de enfermedades pediátricas, especialmente en áreas remotas o con acceso limitado a servicios de salud especializados. Con el objetivo de abordar esta necesidad, proponemos el desarrollo de una app para Android que permita a estudiantes de pediatria o pediatras a realizar un descarte inicial de posibles enfermedades a partir de la descripción de síntomas, facilitando calculadoras y algoritmos interactivos.
+
+Objetivo
+Crear una app para Android que facilite el diagnóstico de enfermedades pediátricas a través de la descripción de síntomas, brindando información útil y orientando al usuario hacia la consulta médica en caso de sospecha de una condición grave.
+
+Cada texto debe tener un enlace a la fuente original, para confiabilidad.
+un pequeño banner en la parte de abajo de la app para Google Ads.
+
+App similares
+Pediadosis:
+/
+ Medscape
+Asociación española de pediatría, web. 
+DOSIS PEDIA
+
+
+Manual MSD pro, manual de Merk, la mejor app que hay, para médicos
+DTsEMT Drip Rate Calc
+ALGA- Gases Arteriales
+Drugs.com
+I.V. Fluids
+Infusion C
+
+
+Pediatr-IA : para Médicos
+
+
+
+	
+Funcionalidades Expandidas (Enfoque Médico)
+
+
+Entrevista inicial avanzada:
+
+
+Campos específicos para antecedentes relevantes (alergias, enfermedades crónicas, medicamentos).
+Escala de dolor pediátrico (p. ej., escala de Wong-Baker).
+Registro de signos vitales (frecuencia cardíaca, respiratoria, saturación de oxígeno).
+Opción de adjuntar fotos (p. ej., lesiones, erupciones).
+
+Descarte de enfermedades optimizado:
+
+
+Búsqueda rápida de síntomas por palabra clave.
+Visualización de enfermedades con mayor probabilidad según los síntomas ingresados.
+Acceso a información detallada de cada enfermedad (definición, síntomas, diagnóstico, tratamiento).
+
+
+Base de datos offline completa (para desarrollar despues):
+
+
+Información detallada de enfermedades (etiología, fisiopatología, cuadro clínico, diagnóstico diferencial, tratamiento).
+Lista de drogas con información específica para pediatría (dosis, presentación, contraindicaciones, interacciones).
+Guías de práctica clínica y protocolos actualizados.
+
+Calculadoras y fórmulas (prioridad):
+
+Todas las calculadoras mencionadas (Holiday-Segar, dosis pediátricas, etc.).
+Cálculo de concentraciones de hidrogeniones.
+Fórmulas de medicamentos (lidocaína, dopamina, adrenalina, potasio, nebulizaciones).
+Cálculo de dosis específicas (sulfato de magnesio, yopal, etc.).
+
+Algoritmos interactivos:
+
+
+Algoritmos de paro cardíaco, SCA, ACV, síndrome coronario agudo, arritmias, asma, etc.
+Visualización paso a paso del algoritmo, con opciones para seleccionar la respuesta del paciente y avanzar en el proceso.
+Acceso a información adicional sobre cada paso del algoritmo (p. ej., dosis de medicamentos, técnicas de reanimación).
+
+NO Gestión de pacientes:
+
+
+NO Lista de pacientes en turno o guardia.
+NO Registro de datos y seguimiento de cada paciente.
+NO Posibilidad de agregar notas y comentarios sobre la evolución del paciente.
+
+Acceso a recursos externos:
+
+
+Enlaces a guías de práctica clínica en línea.
+Acceso a bases de datos de medicamentos actualizadas COMO VADEMECUM ARGENTINA https://www.vademecum.es/argentina/ar/alfa
+
+Conexión con IA (opcional A FUTURO):
+
+
+
+EMERGENCIA : se abre el menú de algoritmos de emergencia 
+
+
+ La primera interacción en "Pediatr-IA" sea crucial para direccionar al usuario a la experiencia adecuada según la urgencia y su perfil (médico o no). 
+
+Me parece una excelente forma de optimizar la app y hacerla más eficiente.
+
+Te presento cómo podríamos estructurar esas cuatro experiencias y qué funcionalidades incluir en cada una:
+
+
+1. Emergencia - Soy Médico
+ * Objetivo: Brindar acceso rápido a herramientas críticas para la atención de emergencias pediátricas.
+ * Funcionalidades:*
+   * Algoritmos de emergencia:*
+     * Paro cardíaco (RCP pediátrica)
+     * Anafilaxia
+     * Crisis asmática grave
+     * Convulsiones
+     * Traumatismo craneoencefálico grave
+   * Calculadoras de dosis de emergencia:*
+     * Adrenalina
+     * Atropina
+     * Bicarbonato
+     * Lidocaína
+     * Otros medicamentos de emergencia
+   * Guía rápida de procedimientos:*
+     * Intubación endotraqueal
+     * Acceso venoso
+     * Ventilación a presión positiva
+   * Comunicación directa:*
+     * Botón de llamada rápida a servicios de emergencia (911 u otro número local)
+     * Opción de contactar a un colega o especialista (si está configurado)
+
+
+
+
+2. No es Emergencia 
+ * Objetivo: Brindar herramientas completas para la atención pediátrica general.
+ * Funcionalidades:*
+   * Entrevista inicial avanzada:*
+     * Antecedentes detallados
+     * Escala de dolor pediátrico
+     * Signos vitales
+     * Adjuntar fotos
+   * Descarte de enfermedades optimizado:*
+     * Búsqueda por síntomas
+     * Enfermedades más probables
+     * Información detallada de cada enfermedad
+   * Base de datos offline completa:*
+     * Enfermedades (etiología, cuadro clínico, diagnóstico, tratamiento)
+     * Drogas (dosis, presentación, contraindicaciones)
+     * Guías de práctica clínica
+   * Calculadoras y fórmulas:*
+     * Dosis pediátricas
+     * Líquidos
+     * Nutrición
+     * Otras
+   * Algoritmos interactivos:*
+     * Amplia variedad de algoritmos (cardiovasculares, respiratorios, etc.)
+
+     * Notas y comentarios
+
+
+
+Consideraciones adicionales
+ * Diseño UI/UX: Adaptar el diseño y el lenguaje de cada sección al público objetivo.
+ * Navegación: Permitir cambiar entre secciones (ej. de "No es emergencia" a "Emergencia") si la situación lo requiere.
+ * Integración: Asegurar que las funcionalidades estén integradas de forma coherente.
+
+
+
+Signos y síntomas es igual a semiología médica eso lleva al diagnóstico. El tratamiento depende de eso…
+
+
+Dr Alvaro dijo: quiero que la App te identifique al menos 4 o 5 diagnóstico diferenciales y que desarrolle: porque no son esas patología según libro y editorial y página.
+
+
+razonar Por qué NO es esta enfermedad , bibliografía , fuentes verificables
+
+Por que SI PUEDE ser esta enfermedad 
+, signos, síntomas, semiología, bibliografía
+Como se le detectó el Kawasaki a isabella 
+El. Dr Buscó en la app en “Enfermedades que causen editemas, 
+Dentro, la 4ta, 5ta, 6ta, 7ma enfermedad 
+
+Síntoma “Salpullido general”
+Síntomas “ fiebre”
+Síntoma “ conjuntivitis” 
+
+Dio como resultado : 7ma enfermedad, kawasaki
+
+
+
+
+Lista de calculadoras y fórmulas (organizadas por categorías):
+
+
+Cálculo de dosis:
+
+
+Amoxicilina (mg/kg, presentación en jarabe/suspensión)
+Amoxicilina/clavulánico (mg/kg, presentación en jarabe/suspensión)
+Cefalexina (mg/kg, presentación en jarabe/suspensión/cápsulas)
+Ibuprofeno (mg/kg, presentación en jarabe/suspensión/comprimidos)
+Paracetamol (mg/kg, presentación en jarabe/suspensión/comprimidos)
+Dosis de antibióticos específicos (azitromicina, claritromicina, etc.)
+Dosis de antivirales (oseltamivir, etc.)
+Dosis de corticoides (prednisona, dexametasona, etc.)
+Dosis de broncodilatadores (salbutamol, terbutalina, etc.)
+Dosis de adrenalina (en diferentes situaciones clínicas)
+Dosis de atropina
+Dosis de bicarbonato
+Dosis de calcio
+Dosis de digoxina
+Dosis de dopamina
+Dosis de epinefrina
+Dosis de lidocaína
+Dosis de naloxona
+Dosis de vasopresina
+Dosis de otros medicamentos pediátricos comunes
+Cálculo de dosis según peso, edad y/o superficie corporal
+Ajuste de dosis en insuficiencia renal o hepática
+
+
+Cálculo de líquidos:
+
+
+Holliday-Segar (requerimientos de líquidos de mantenimiento)
+Cálculo de líquidos para hidratación (según grado de deshidratación: leve, moderada, grave)
+Cálculo de goteo de soluciones (gotas/minuto)
+Cálculo de volumen de infusión
+adren, amiodarona
+atropina, procainamida
+adrenalina, dopamina, lidocaina
+digox, verapam, diltiazem mg
+Cálculo de pérdidas de líquidos (diarrea, vómitos, etc.)
+
+Evaluación nutricional:
+
+
+Índice de masa corporal (IMC) (con tablas de percentiles)
+Percentiles de crecimiento (peso y talla)
+Requerimientos calóricos (basal y total)
+Cálculo de gasto energético
+Evaluación del estado nutricional (desnutrición, obesidad)
+
+Otros cálculos:
+
+
+Cálculo de la fracción de eyección
+Cálculo del puntaje de Apgar
+Cálculo de la edad corregida en prematuros
+
+Interfaz intuitiva (detalles):
+
+
+Diseño limpio y sin distracciones, con enfoque en la tarea.
+Campos de entrada con etiquetas claras y unidades especificadas.
+Validación de datos con mensajes de error descriptivos.
+Botón de "Calcular" destacado y fácil de ubicar.
+Resultados claros y concisos, con unidades y explicaciones si es necesario.
+Opción de guardar o imprimir los resultados para el registro del paciente.
+
+
+
+
+Sección de "Algoritmos" (Detalle Completo)
+Lista de algoritmos (organizados por categorías):
+
+
+Cardiovasculares:
+
+
+Paro cardíaco (algoritmo de RCP pediátrica)
+Síndrome coronario agudo (diagnóstico y tratamiento)
+Arritmias (taquicardia supraventricular, fibrilación auricular, etc.)
+Bradicardia
+Bloqueo AV
+
+Respiratorios:
+
+
+Asma aguda (tratamiento en urgencias)
+Insuficiencia respiratoria (manejo y ventilación mecánica)
+Croup (laringotraqueítis)
+Bronquiolitis
+
+Neurológicos:
+
+
+Accidente cerebrovascular (ACV) (diagnóstico y tratamiento)
+Convulsiones (manejo en niños)
+Estado epiléptico
+Meningitis
+
+Infecciones:
+
+
+Sepsis
+Meningitis
+Neumonía
+Infección urinaria
+
+Traumatismos:
+
+
+Traumatismo craneoencefálico (TCE)
+Trauma abdominal
+Quemaduras
+
+Otros:
+
+
+Anafilaxia
+Cetoacidosis diabética
+Intoxicaciones
+PARTOGRAMA
+
+Interfaz interactiva (detalles):
+
+
+Flujo del algoritmo con diagrama claro y pasos numerados.
+Opciones de respuesta a preguntas o situaciones clínicas.
+Navegación sencilla con botones para avanzar y retroceder.
+Información adicional al seleccionar una opción (dosis, técnicas, etc.).
+Alertas para pasos críticos o decisiones importantes.
+Visualización adaptable a diferentes pantallas.
+
+
+Sección de "Base de datos":
+
+
+Búsqueda rápida por palabra clave.
+Visualización clara de la información de cada enfermedad o medicamento.
+
+Diseño general:
+
+
+Colores sobrios y profesionales (p. ej., tonos de azul y gris).
+Tipografía legible y clara.
+Diseño adaptable a diferentes tamaños de pantalla (tabletas, smartphones).
+
+
+Público objetivo
+
+Médicos: Como herramienta de apoyo para el diagnóstico inicial y la triaje de pacientes.
+Ventajas competitivas
+
+Disponibilidad offline: Funciona en gran medida sin conexión a Internet, lo que la hace útil en áreas remotas.
+
+Interfaz intuitiva: Diseño fácil de usar y navegación clara para un uso rápido y eficiente.
+
+Información confiable: Base de datos actualizada y verificada por profesionales médicos.
+
+Orientación médica: Siempre enfatiza la importancia de consultar a un médico para un diagnóstico y tratamiento adecuados.
+
+Plan de desarrollo
+
+Investigación y recopilación de datos: Recopilación de información sobre enfermedades pediátricas, síntomas y tratamientos.
+
+Diseño de la interfaz de usuario (UI): Creación de un diseño intuitivo y atractivo que facilite la navegación y la interacción.
+
+Desarrollo del backend: Implementación de la lógica de descarte de enfermedades y la base de datos (despues de las calculadoras y algoritmos interactivos).
+
+Integración de la IA: (Opcional) Conexión a una IA para brindar recomendaciones adicionales.
+
+Pruebas y depuración: Realización de pruebas exhaustivas para garantizar el correcto funcionamiento y la estabilidad de la app.
+
+Lanzamiento y promoción: Publicación de la app en la Play Store y promoción a través de 
+diferentes canales.
+
+
+
+
+Experiencia previa y base para el desarrollo
+
+El Dr. Hernán, médico general y traumatólogo con amplia trayectoria, ha desarrollado a lo largo de su carrera una serie de herramientas prácticas en formato de hojas de cálculo de Excel para facilitar su trabajo diario. Estas hojas abarcan diversas áreas de la pediatría y han demostrado ser de gran utilidad para el cálculo de dosis, preparación de soluciones, manejo de infecciones y más.
+
+Entre las hojas de cálculo más destacadas se encuentran:
+
+Método de Holiday-Segar: Para el cálculo de la superficie corporal en niños.
+
+Mezcla de solución fisiológica: Para determinar la cantidad adecuada de solución salina en lavados nasales.
+
+Cálculo de insulina: Para ajustar la dosis de insulina en pacientes pediátricos.
+
+Cálculo nutricional: Para evaluar el estado nutricional y requerimientos de niños.
+
+Cuadros ácido-base: Para analizar y comprender los trastornos ácido-base en niños.
+
+Cálculo de dosis pediátricas: Para determinar la dosis segura y efectiva de medicamentos en niños.
+
+Mezcla de soluciones celulares: Para la preparación de soluciones utilizadas en terapias celulares.
+
+Infecciones, bacterias y antibióticos: Para facilitar la selección del antibiótico adecuado según la infección y el microorganismo involucrado.
+
+La experiencia y el conocimiento plasmados en estas hojas de cálculo representan una base sólida y valiosa para el desarrollo de la app "Pediatr-IA". La lógica y los algoritmos utilizados en las hojas de cálculo pueden ser adaptados y optimizados para su implementación en la app, garantizando la precisión y confiabilidad de los resultados.
+
+Además, contar con la experiencia del Dr. Hernán en el diseño y validación de estas herramientas asegura que la app cumpla con las necesidades reales de los profesionales de la salud y que sea una herramienta útil y práctica en su día a día.
+
+
+muchas veces, en esos documentos de excel, el texto en AZUL es el input, la celda donde se escribe para que las otras cambien el resultado a mostrar. chren VERDE , las celdas con resultados, con formulas
+
+
+
+Diseño de la UI de "Pediatr-IA" en Figma
+
+El Doctor hernan tiene un respaldo de documentos que son la fuente de informacion para el desarrollo de la app, mas NO es la referencia final que debe tener cada item, la referencia o fuente tiene que ser online en paginas confiables., yo puedo ir compartiendo esta información y estos PDF mientras desarrollamos la app, podemos ir modificando el documento "tree.txt" para ir marcando lo que ya se cargó a la app
+
+
+
+
+---
+Cuentas de Instagram con informacion de pediatria
+Pediatra Mel
+Mama y Pediatra
+Doctora Carla Osin
+
+
