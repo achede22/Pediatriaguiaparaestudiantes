@@ -32,35 +32,56 @@ export default function NonEmergency() {
       nombre: 'Otitis Media Aguda',
       sintomas: ['Otalgia', 'Fiebre', 'Irritabilidad'],
       criterios: ['Abombamiento timpánico', 'Eritema timpánico'],
-      tratamiento: 'Amoxicilina 80-90 mg/kg/día'
+      tratamiento: 'Amoxicilina 80-90 mg/kg/día',
+      fuente: 'https://enfamilia.aeped.es/temas-salud/otitis-media-aguda'
     },
     {
       id: 'faringitis',
       nombre: 'Faringoamigdalitis Estreptocócica',
       sintomas: ['Odinofagia', 'Fiebre', 'Ausencia de tos'],
       criterios: ['Exudado amigdalino', 'Adenopatías cervicales'],
-      tratamiento: 'Penicilina V o Amoxicilina 50 mg/kg/día'
+      tratamiento: 'Penicilina V o Amoxicilina 50 mg/kg/día',
+      fuente: 'https://enfamilia.aeped.es/temas-salud/faringoamigdalitis'
     },
     {
       id: 'kawasaki',
       nombre: 'Enfermedad de Kawasaki',
-      sintomas: ['Fiebre > 5 días', 'Exantema', 'Conjuntivitis', 'Adenopatía', 'Cambios en extremidades'],
+      sintomas: ['Fiebre >5d', 'Conjuntivitis', 'Lengua fresa', 'Labios fisurados', 'Exantema', 'Adenopatía', 'Cambios extremidades'],
       criterios: ['Fiebre persistente + 4/5 criterios clínicos'],
-      tratamiento: 'Inmunoglobulina IV + Aspirina (Derivar)'
+      tratamiento: 'Inmunoglobulina IV + Aspirina (Derivar)',
+      fuente: 'https://enfamilia.aeped.es/temas-salud/enfermedad-kawasaki'
     },
     {
       id: 'mano_pie_boca',
       nombre: 'Enfermedad Mano-Pie-Boca',
-      sintomas: ['Fiebre', 'Vesículas en manos/pies', 'Úlceras orales'],
+      sintomas: ['Fiebre', 'Vesículas manos/pies', 'Úlceras orales'],
       criterios: ['Clínico'],
-      tratamiento: 'Sintomático'
+      tratamiento: 'Sintomático',
+      fuente: 'https://enfamilia.aeped.es/temas-salud/enfermedad-boca-mano-pie'
     },
     {
       id: 'roseola',
-      nombre: 'Exantema Súbito (Roséola)',
-      sintomas: ['Fiebre alta 3 días', 'Exantema al ceder fiebre'],
-      criterios: ['Clínico'],
-      tratamiento: 'Sintomático'
+      nombre: 'Exantema Súbito (Roséola/6ta Enfermedad)',
+      sintomas: ['Fiebre alta 3-4 días', 'Exantema al ceder fiebre', 'Niño activo'],
+      criterios: ['Clínico', 'VHH-6/VHH-7'],
+      tratamiento: 'Sintomático',
+      fuente: 'https://enfamilia.aeped.es/temas-salud/exantema-subito-roseola-infantil'
+    },
+    {
+      id: 'eritema_infeccioso',
+      nombre: 'Eritema Infeccioso (5ta Enfermedad)',
+      sintomas: ['Exantema mejillas', 'Patrón reticular', 'Síntomas catarrales'],
+      criterios: ['Clínico', 'Parvovirus B19'],
+      tratamiento: 'Sintomático',
+      fuente: 'https://enfamilia.aeped.es/temas-salud/eritema-infeccioso-quinta-enfermedad'
+    },
+    {
+      id: 'escarlatina',
+      nombre: 'Escarlatina',
+      sintomas: ['Fiebre', 'Exantema áspero', 'Lengua aframbuesada', 'Faringitis'],
+      criterios: ['Streptococcus pyogenes', 'Test rápido +'],
+      tratamiento: 'Penicilina V o Amoxicilina 50 mg/kg/día',
+      fuente: 'https://enfamilia.aeped.es/temas-salud/escarlatina'
     }
   ];
 
@@ -105,6 +126,13 @@ export default function NonEmergency() {
     { nombre: 'Antídotos N-V', img: antidotosNVImg, categoria: 'Toxicología' },
     { nombre: 'Acetaminofén/Anticolinérgicos', img: acetaminofenImg, categoria: 'Toxicología' },
     { nombre: 'Carbón Activado', img: carbonImg, categoria: 'Toxicología' },
+  ];
+
+  const fuentesMedicas = [
+    { nombre: 'EnFamilia (AEP)', url: 'https://enfamilia.aeped.es/', descripcion: 'Asociación Española de Pediatría' },
+    { nombre: 'MedlinePlus Español', url: 'https://medlineplus.gov/spanish/', descripcion: 'NIH - Instituto Nacional de Salud (USA)' },
+    { nombre: 'Manual MSD', url: 'https://www.msdmanuals.com/es', descripcion: 'Información médica profesional' },
+    { nombre: 'HealthyChildren (AAP)', url: 'https://www.healthychildren.org/spanish', descripcion: 'Academia Americana de Pediatría' },
   ];
 
   const handleSearch = (term: string) => {
@@ -305,10 +333,43 @@ export default function NonEmergency() {
                   <div className="bg-gray-50 p-3 rounded-lg text-sm">
                     <p><span className="font-bold">Criterios:</span> {enf.criterios.join(', ')}</p>
                     <p className="mt-1"><span className="font-bold text-purple-700">Tratamiento:</span> {enf.tratamiento}</p>
+                    {enf.fuente && (
+                      <p className="mt-2">
+                        <a
+                          href={enf.fuente}
+                          target="_blank"
+                          rel="noopener noreferrer"
+                          className="text-blue-600 hover:text-blue-800 underline text-xs"
+                        >
+                          📚 Más información
+                        </a>
+                      </p>
+                    )}
                   </div>
                 </div>
               ))}
             </div>
+
+
+            {/* Fuentes Médicas */}
+            <div className="mt-8 pt-6 border-t border-purple-200">
+              <h3 className="font-bold text-purple-700 mb-4">📖 Fuentes Médicas Recomendadas</h3>
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-3">
+                {fuentesMedicas.map((fuente, idx) => (
+                  <a
+                    key={idx}
+                    href={fuente.url}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="bg-purple-50 border border-purple-200 rounded-lg p-3 hover:bg-purple-100 transition-all"
+                  >
+                    <h4 className="font-bold text-purple-800 text-sm">{fuente.nombre}</h4>
+                    <p className="text-xs text-gray-600 mt-1">{fuente.descripcion}</p>
+                  </a>
+                ))}
+              </div>
+            </div>
+
           </div>
         )}
 
