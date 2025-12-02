@@ -323,9 +323,9 @@ export default function NonEmergency() {
               {filteredEnfermedades.map((enf) => (
                 <div key={enf.id} className="border border-gray-200 rounded-xl p-4 hover:border-purple-300 transition-all">
                   <h3 className="font-bold text-gray-800 mb-2">{enf.nombre}</h3>
-                  <div className="flex flex-wrap gap-2 mb-3">
+                  <div className="grid grid-cols-3 gap-2 mb-3">
                     {enf.sintomas.map((sintoma, idx) => (
-                      <span key={idx} className="bg-purple-50 text-purple-700 px-2 py-1 rounded-lg text-sm">
+                      <span key={idx} className="bg-purple-50 text-purple-700 px-2 py-1 rounded-lg text-xs text-center flex items-center justify-center">
                         {sintoma}
                       </span>
                     ))}
