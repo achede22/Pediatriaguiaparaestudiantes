@@ -90,6 +90,29 @@ const decisionTrees: Record<string, Record<string, Question>> = {
     d_crisis_asmatica: { id: 'd_crisis_asmatica', text: '', diagnosis: 'Crisis Asmática / SBO', urgency: 'medium' },
     d_neumonia: { id: 'd_neumonia', text: '', diagnosis: 'Probable Neumonía', urgency: 'medium' },
     d_ira_alta: { id: 'd_ira_alta', text: '', diagnosis: 'Infección Respiratoria Alta', urgency: 'low' },
+    // Nuevos diagnósticos respiratorios
+    q_inicio_brusco: {
+      id: 'q_inicio_brusco',
+      text: '¿El inicio fue brusco (atragantamiento)?',
+      yesNext: 'd_cuerpo_extrano',
+      noNext: 'q_fiebre_alta_toxico',
+    },
+    d_cuerpo_extrano: { id: 'd_cuerpo_extrano', text: '', diagnosis: 'Sospecha de Cuerpo Extraño (OVACE)', urgency: 'high' },
+    q_fiebre_alta_toxico: {
+      id: 'q_fiebre_alta_toxico',
+      text: '¿Fiebre alta, apariencia tóxica, sialorrea (babeo)?',
+      yesNext: 'd_epiglotitis',
+      noNext: 'q_tos_perruna',
+    },
+    d_epiglotitis: { id: 'd_epiglotitis', text: '', diagnosis: 'Sospecha de Epiglotitis - EMERGENCIA', urgency: 'high' },
+    q_tos_perruna: {
+      id: 'q_tos_perruna',
+      text: '¿Tos perruna/metálica predominante?',
+      yesNext: 'd_laringitis',
+      noNext: 'd_traqueitis',
+    },
+    d_laringitis: { id: 'd_laringitis', text: '', diagnosis: 'Laringitis Aguda (Crup)', urgency: 'medium' },
+    d_traqueitis: { id: 'd_traqueitis', text: '', diagnosis: 'Posible Traqueítis Bacteriana', urgency: 'high' },
   },
 };
 
@@ -106,9 +129,15 @@ export function DiagnosticHelper({ onGoBack }: DiagnosticHelperProps) {
 
   const handleAnswer = (answer: 'yes' | 'no') => {
     if (!selectedTree) return;
-    
+
     const currentQ = decisionTrees[selectedTree][currentQuestionId];
-    const nextId = answer === 'yes' ? currentQ.yesNext : currentQ.noNext;
+    // Lógica específica para redirigir a nuevas ramas si es necesario
+    let nextId = answer === 'yes' ? currentQ.yesNext : currentQ.noNext;
+
+    // Redirección especial para conectar con la nueva rama de estridor si estamos en el nodo start de respiratorio
+    if (selectedTree === 'respiratorio' && currentQuestionId === 'start' && answer === 'yes') {
+      nextId = 'q_inicio_brusco'; // Saltamos a la nueva lógica detallada
+    }
 
     if (nextId) {
       setHistory([...history, currentQuestionId]);
@@ -135,7 +164,7 @@ export function DiagnosticHelper({ onGoBack }: DiagnosticHelperProps) {
       animate={{ x: 0 }}
       exit={{ x: '100%' }}
       transition={{ type: 'spring', stiffness: 300, damping: 30 }}
-      className="min-h-screen bg-gradient-to-br from-purple-50 to-indigo-50 p-6"
+      className="min-h-screen bg-gradient-to-br from-teal-50 to-cyan-50 p-6"
     >
       <div className="max-w-2xl mx-auto">
         <div className="bg-white rounded-2xl p-6 shadow-xl mb-6">
@@ -146,10 +175,10 @@ export function DiagnosticHelper({ onGoBack }: DiagnosticHelperProps) {
             >
               <ArrowLeft className="w-6 h-6" />
             </button>
-            <h1 className="text-xl font-bold text-purple-600 flex-1">
+            <h1 className="text-xl font-bold text-teal-700 flex-1">
               {selectedTree ? 'Ayudante Diagnóstico' : 'Seleccione Síntoma Principal'}
             </h1>
-            <Activity className="w-8 h-8 text-purple-600" />
+            <Activity className="w-8 h-8 text-teal-600" />
           </div>
         </div>
 
@@ -188,19 +217,32 @@ export function DiagnosticHelper({ onGoBack }: DiagnosticHelperProps) {
               {isDiagnosis ? (
                 <div className="text-center space-y-6">
                   <div className={`w-20 h-20 mx-auto rounded-full flex items-center justify-center
-                    ${currentQ?.urgency === 'high' ? 'bg-red-100 text-red-600' : 
-                      currentQ?.urgency === 'medium' ? 'bg-orange-100 text-orange-600' : 
-                      'bg-green-100 text-green-600'}`}
+                    ${currentQ?.urgency === 'high' ? 'bg-red-100 text-red-600' :
+                      currentQ?.urgency === 'medium' ? 'bg-orange-100 text-orange-600' :
+                        'bg-green-100 text-green-600'}`}
                   >
                     <AlertCircle className="w-10 h-10" />
                   </div>
                   <div>
                     <h2 className="text-2xl font-bold text-gray-800 mb-2">Diagnóstico Sugerido</h2>
-                    <p className="text-xl text-purple-600 font-medium">{currentQ?.diagnosis}</p>
+                    <p className="text-xl text-teal-700 font-medium">{currentQ?.diagnosis}</p>
                   </div>
+
+                  <div className="pt-4 border-t border-gray-100">
+                    <p className="text-sm text-gray-500 mb-3">Para más información clínica detallada:</p>
+                    <a
+                      href="https://www.aeped.es/protocolos/"
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="inline-flex items-center gap-2 text-blue-600 hover:text-blue-800 font-medium underline"
+                    >
+                      Ver Protocolos AEPED <Activity className="w-4 h-4" />
+                    </a>
+                  </div>
+
                   <button
                     onClick={reset}
-                    className="px-8 py-3 bg-gray-100 hover:bg-gray-200 rounded-xl font-medium transition-all"
+                    className="px-8 py-3 bg-gray-100 hover:bg-gray-200 rounded-xl font-medium transition-all w-full"
                   >
                     Nueva Consulta
                   </button>
