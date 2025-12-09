@@ -89,7 +89,7 @@ export function ContactModal({ isOpen, onClose }: ContactModalProps) {
 
                                     <div className="pt-4 border-t border-gray-200">
                                         <p className="text-xs text-gray-500 text-center">
-                                            Creado por estudiantes de medicina para padres y madres
+                                            Creado por estudiantes de medicina para estudiantes
                                         </p>
                                     </div>
                                 </div>
