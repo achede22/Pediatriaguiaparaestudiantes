@@ -1,0 +1,3 @@
+DONDE EN EMERGENCIA ALGORITMOS Y DOSIS da el resultado en mg pero no el equivalente en Mililitros
+nececito varias opciones de presentacion
+incluir fenitoina

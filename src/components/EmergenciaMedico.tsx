@@ -1,6 +1,8 @@
 import { useState } from 'react';
 import { motion } from 'motion/react';
-import { ArrowLeft, Heart, AlertTriangle, Wind, Zap, Activity, Calculator, FileText, Phone, AlertCircle } from 'lucide-react';
+import { ArrowLeft, Heart, AlertTriangle, Wind, Zap, Activity, Calculator, FileText, Phone, AlertCircle, ChevronDown, Search } from 'lucide-react';
+import { medicamentosEmergencia, calcularDosisEmergencia } from '../data/emergencyMedications';
+import type { MedicamentoEmergencia } from '../data/emergencyMedications';
 
 interface EmergenciaMedicoProps {
   onGoBack: () => void;
@@ -13,6 +15,8 @@ export function EmergenciaMedico({ onGoBack }: EmergenciaMedicoProps) {
   const [selectedAlgoritmo, setSelectedAlgoritmo] = useState<string | null>(null);
   const [peso, setPeso] = useState('');
   const [searchTerm, setSearchTerm] = useState('');
+  const [selectedPresentaciones, setSelectedPresentaciones] = useState<Record<string, number>>({});
+  const [categoriaFilter, setCategoriaFilter] = useState<string>('todas');
 
   const algoritmos = [
     { id: 'rcp', nombre: 'Paro Cardíaco (RCP Pediátrica)', icon: Heart },
@@ -23,103 +27,105 @@ export function EmergenciaMedico({ onGoBack }: EmergenciaMedicoProps) {
     { id: 'deshidratacion', nombre: 'Deshidratación Severa / Shock', icon: Activity },
   ];
 
-  const medicamentosEmergencia = [
-    {
-      nombre: 'Adrenalina (IM/SC)',
-      dosis: '0.01 mg/kg (máx 0.5 mg)',
-      presentacion: 'Ampolla 1mg/1ml (1:1000)',
-      maxDosis: 0.5,
-      notas: 'Repetir cada 5-15 min si es necesario. Vía IM preferente (muslo).',
-      fuente: 'https://www.guiafarmapediatrica.es/indice/farmacos-de-uso-en-emergencias/anafilaxia/adrenalina-im-o-sc'
-    },
-    {
-      nombre: 'Adrenalina (Nebulizada)',
-      dosis: '3-5 mg/dosis (3-5 ml)',
-      presentacion: 'Ampolla 1mg/1ml',
-      maxDosis: 5,
-      notas: 'Diluir con suero fisiológico hasta 4ml. Flujo O2 4-6 l/min.',
-      fuente: 'https://www.guiafarmapediatrica.es/indice/farmacos-de-uso-en-emergencias/urgencias-respiratorias/adrenalina-nebulizada'
-    },
-    {
-      nombre: 'Atropina',
-      dosis: '0.02 mg/kg (mín 0.1mg, máx 0.5mg)',
-      presentacion: 'Ampolla 1mg/1ml',
-      maxDosis: 0.5,
-      minDosis: 0.1,
-      fuente: 'https://www.guiafarmapediatrica.es/node/549'
-    },
-    {
-      nombre: 'Bromuro de Ipratropio',
-      dosis: '<30kg: 250mcg | >30kg: 500mcg',
-      presentacion: 'Solución para inhalación',
-      maxDosis: 0.5,
-      notas: 'Cada 20 min, máx 3 dosis en 1 hora. Asociar a Salbutamol.',
-      fuente: 'https://www.guiafarmapediatrica.es/indice/farmacos-de-uso-en-emergencias/urgencias-respiratorias/bromuro-de-ipratropio-nebulizado'
-    },
-    {
-      nombre: 'Bicarbonato',
-      dosis: '1 mEq/kg IV',
-      presentacion: '1 mEq/ml',
-      maxDosis: 50,
-      fuente: 'https://www.guiafarmapediatrica.es/indice/farmacos-de-uso-en-emergencias/urgencias-respiratorias/bicarbonato'
-    },
-    {
-      nombre: 'Lidocaína',
-      dosis: '1 mg/kg IV',
-      presentacion: 'Ampolla 100mg/5ml',
-      maxDosis: 100
-    },
-    {
-      nombre: 'Midazolam',
-      dosis: '0.1-0.2 mg/kg IM/IV',
-      presentacion: 'Ampolla 5mg/5ml',
-      maxDosis: 10
-    },
-    {
-      nombre: 'Diazepam',
-      dosis: '0.3-0.5 mg/kg Rectal',
-      presentacion: 'Ampolla 10mg/2ml',
-      maxDosis: 10
-    },
-  ];
+  // Obtener categorías únicas
+  const categorias = ['todas', ...Array.from(new Set(medicamentosEmergencia.map(m => m.categoria)))];
 
-  const filteredMedicamentos = medicamentosEmergencia.filter(med =>
-    med.nombre.toLowerCase().includes(searchTerm.toLowerCase())
-  );
+  // Filtrar por nombre y categoría
+  const filteredMedicamentos = medicamentosEmergencia.filter(med => {
+    const matchesSearch = med.nombre.toLowerCase().includes(searchTerm.toLowerCase());
+    const matchesCategoria = categoriaFilter === 'todas' || med.categoria === categoriaFilter;
+    return matchesSearch && matchesCategoria;
+  });
 
-  const calcularDosis = (medicamento: string, pesoKg: number) => {
-    const med = medicamentosEmergencia.find(m => m.nombre === medicamento);
-    if (!med) return '0';
+  const getPresentacionIdx = (medNombre: string) => selectedPresentaciones[medNombre] || 0;
 
-    // Lógica especial para medicamentos con dosis fijas por rango de peso
-    if (medicamento === 'Bromuro de Ipratropio') {
-      return pesoKg < 30 ? '250 mcg' : '500 mcg';
+  const renderDosisCalculada = (med: MedicamentoEmergencia, pesoKg: number) => {
+    const presIdx = getPresentacionIdx(med.nombre);
+    const resultado = calcularDosisEmergencia(med, pesoKg, presIdx);
+
+    if (resultado.esFija) {
+      return (
+        <div className="space-y-2">
+          <p className="text-orange-800 text-sm font-medium">{resultado.textoFijo || 'Dosis fija'}</p>
+          <div className="flex flex-wrap gap-3">
+            <div className="bg-white px-4 py-2 rounded-lg border border-orange-200">
+              <span className="text-xs text-gray-500 block">Dosis</span>
+              <span className="text-lg font-bold text-orange-900">{resultado.dosisMg} {resultado.unidad}</span>
+            </div>
+            <div className="bg-white px-4 py-2 rounded-lg border border-blue-200">
+              <span className="text-xs text-gray-500 block">Volumen</span>
+              <span className="text-lg font-bold text-blue-700">{resultado.dosisMl.toFixed(2)} mL</span>
+            </div>
+          </div>
+        </div>
+      );
     }
 
-    if (medicamento === 'Adrenalina (Nebulizada)') {
-      return '3 - 5 mg';
+    // Rango de dosis
+    if (resultado.dosisMinMg !== undefined && resultado.dosisMaxMg !== undefined) {
+      return (
+        <div className="space-y-2">
+          <div className="flex flex-wrap gap-3">
+            <div className="bg-white px-4 py-2 rounded-lg border border-orange-200 flex-1 min-w-[120px]">
+              <span className="text-xs text-gray-500 block">Dosis (rango)</span>
+              <span className="text-lg font-bold text-orange-900">
+                {resultado.dosisMinMg.toFixed(2)} – {resultado.dosisMaxMg.toFixed(2)} {resultado.unidad}
+              </span>
+            </div>
+            <div className="bg-white px-4 py-2 rounded-lg border border-blue-200 flex-1 min-w-[120px]">
+              <span className="text-xs text-gray-500 block">Volumen (rango)</span>
+              <span className="text-lg font-bold text-blue-700">
+                {resultado.dosisMinMl!.toFixed(2)} – {resultado.dosisMaxMl!.toFixed(2)} mL
+              </span>
+            </div>
+          </div>
+          {resultado.excedeDosisMax && (
+            <div className="flex items-center gap-2 text-red-700 bg-red-50 p-2 rounded-lg border border-red-200">
+              <AlertCircle className="w-4 h-4 flex-shrink-0" />
+              <span className="text-xs font-medium">Dosis máx por toma alcanzada: {med.maxDosisPorToma} {resultado.unidad}</span>
+            </div>
+          )}
+        </div>
+      );
     }
 
-    let dosisCalculada = 0;
-
-    switch (medicamento) {
-      case 'Adrenalina (IM/SC)': dosisCalculada = pesoKg * 0.01; break;
-      case 'Atropina': dosisCalculada = pesoKg * 0.02; break;
-      case 'Bicarbonato': dosisCalculada = pesoKg * 1; break;
-      case 'Lidocaína': dosisCalculada = pesoKg * 1; break;
-      case 'Midazolam': dosisCalculada = pesoKg * 0.15; break;
-      case 'Diazepam': dosisCalculada = pesoKg * 0.4; break;
-      default: dosisCalculada = 0;
-    }
-
-    if (med.minDosis && dosisCalculada < med.minDosis) dosisCalculada = med.minDosis;
-    if (med.maxDosis && dosisCalculada > med.maxDosis) return `${med.maxDosis} (Dosis Máxima)`;
-
-    return dosisCalculada.toFixed(2);
+    // Dosis simple
+    return (
+      <div className="space-y-2">
+        <div className="flex flex-wrap gap-3">
+          <div className="bg-white px-4 py-2 rounded-lg border border-orange-200 flex-1 min-w-[120px]">
+            <span className="text-xs text-gray-500 block">Dosis</span>
+            <span className="text-lg font-bold text-orange-900">{resultado.dosisMg.toFixed(2)} {resultado.unidad}</span>
+          </div>
+          <div className="bg-white px-4 py-2 rounded-lg border border-blue-200 flex-1 min-w-[120px]">
+            <span className="text-xs text-gray-500 block">Volumen</span>
+            <span className="text-lg font-bold text-blue-700">{resultado.dosisMl.toFixed(2)} mL</span>
+          </div>
+        </div>
+        {resultado.porDebajoDosisMin && (
+          <div className="flex items-center gap-2 text-amber-700 bg-amber-50 p-2 rounded-lg border border-amber-200">
+            <AlertCircle className="w-4 h-4 flex-shrink-0" />
+            <span className="text-xs font-medium">Dosis mínima aplicada: {med.minDosis} {resultado.unidad}</span>
+          </div>
+        )}
+        {resultado.excedeDosisMax && (
+          <div className="flex items-center gap-2 text-red-700 bg-red-50 p-2 rounded-lg border border-red-200">
+            <AlertCircle className="w-4 h-4 flex-shrink-0" />
+            <span className="text-xs font-medium">⚠️ Dosis máx por toma alcanzada: {med.maxDosisPorToma} {resultado.unidad}</span>
+          </div>
+        )}
+        {resultado.excedeDosisMaxDia && (
+          <div className="flex items-center gap-2 text-red-700 bg-red-50 p-2 rounded-lg border border-red-200">
+            <AlertCircle className="w-4 h-4 flex-shrink-0" />
+            <span className="text-xs font-medium">⚠️ Dosis máx por DÍA alcanzada: {med.maxDosisPorDia} {resultado.unidad}</span>
+          </div>
+        )}
+      </div>
+    );
   };
 
   const renderAlgoritmoDetalle = (id: string) => {
-    const algoritmosData: any = {
+    const algoritmosData: Record<string, { titulo: string; pasos: string[] }> = {
       'rcp': {
         titulo: 'RCP Pediátrica',
         pasos: [
@@ -165,7 +171,8 @@ export function EmergenciaMedico({ onGoBack }: EmergenciaMedicoProps) {
           'Si >5 min: Midazolam 0.2 mg/kg IM o bucal (máx 10mg)',
           'Alternativa: Diazepam 0.3-0.5 mg/kg rectal (máx 10mg)',
           'Si persiste >10 min: segunda dosis de benzodiacepina',
-          'Si persiste >20 min: considerar fenitoína o fenobarbital',
+          'Si persiste >20 min: Fenitoína 15-20 mg/kg IV en 20 min (máx 1g)',
+          'Alternativa a fenitoína: Fenobarbital 15-20 mg/kg IV en 15-30 min',
         ]
       },
       'tce': {
@@ -196,6 +203,7 @@ export function EmergenciaMedico({ onGoBack }: EmergenciaMedicoProps) {
     };
 
     const algoritmo = algoritmosData[id];
+    if (!algoritmo) return null;
     return (
       <div className="space-y-4">
         <h3 className="text-blue-600 mb-4">{algoritmo.titulo}</h3>
@@ -292,7 +300,7 @@ export function EmergenciaMedico({ onGoBack }: EmergenciaMedicoProps) {
                        hover:shadow-xl active:scale-98 transition-all flex items-center gap-4 justify-center"
             >
               <Phone className="w-8 h-8" />
-              <span>Llamar al 911</span>
+              <span>Llamar Emergencias</span>
             </a>
           </motion.div>
         )}
@@ -352,6 +360,7 @@ export function EmergenciaMedico({ onGoBack }: EmergenciaMedicoProps) {
               <h2 className="flex-1 text-orange-600">Calculadoras de Dosis</h2>
             </div>
 
+            {/* Peso del paciente */}
             <div className="mb-6 bg-orange-50 p-6 rounded-xl border-2 border-orange-200">
               <label className="block mb-3 font-bold text-orange-800">Peso del paciente (kg):</label>
               <input
@@ -369,48 +378,134 @@ export function EmergenciaMedico({ onGoBack }: EmergenciaMedicoProps) {
               )}
             </div>
 
+            {/* Buscador */}
             <div className="mb-4">
-              <input
-                type="text"
-                value={searchTerm}
-                onChange={(e) => setSearchTerm(e.target.value)}
-                placeholder="Buscar medicación..."
-                className="w-full p-3 border-2 border-gray-200 rounded-xl focus:border-orange-400 focus:outline-none"
-              />
+              <div className="relative">
+                <Search className="absolute left-4 top-3.5 w-5 h-5 text-gray-400" />
+                <input
+                  type="text"
+                  value={searchTerm}
+                  onChange={(e) => setSearchTerm(e.target.value)}
+                  placeholder="Buscar medicamento por nombre..."
+                  className="w-full pl-12 p-3 border-2 border-gray-200 rounded-xl focus:border-orange-400 focus:outline-none"
+                />
+              </div>
             </div>
 
+            {/* Filtro por categoría */}
+            <div className="mb-6 flex flex-wrap gap-2">
+              {categorias.map((cat) => (
+                <button
+                  key={cat}
+                  onClick={() => setCategoriaFilter(cat)}
+                  className={`px-3 py-1.5 rounded-full text-xs font-medium transition-all ${categoriaFilter === cat
+                      ? 'bg-orange-500 text-white'
+                      : 'bg-gray-100 text-gray-600 hover:bg-gray-200'
+                    }`}
+                >
+                  {cat === 'todas' ? 'Todas' : cat}
+                </button>
+              ))}
+            </div>
+
+            {/* Lista de medicamentos */}
             <div className="space-y-4">
               {filteredMedicamentos.length > 0 ? (
-                filteredMedicamentos.map((med: any) => (
+                filteredMedicamentos.map((med) => (
                   <div key={med.nombre} className="bg-gray-50 p-5 rounded-xl border-2 border-gray-200">
-                    <div className="flex justify-between items-start mb-2">
-                      <h3 className="text-lg font-bold text-gray-900">{med.nombre}</h3>
-                      {med.maxDosis && (
-                        <span className="text-xs bg-red-100 text-red-600 px-2 py-1 rounded-full border border-red-200">
-                          Máx: {med.maxDosis} {med.nombre === 'Bicarbonato' ? 'mEq' : 'mg'}
-                        </span>
-                      )}
+                    {/* Header */}
+                    <div className="flex flex-wrap justify-between items-start gap-2 mb-3">
+                      <div>
+                        <h3 className="text-lg font-bold text-gray-900">{med.nombre}</h3>
+                        <span className="text-xs text-gray-500 bg-gray-200 px-2 py-0.5 rounded-full">{med.categoria}</span>
+                      </div>
+                      <div className="flex flex-wrap gap-1">
+                        {med.maxDosisPorToma && (
+                          <span className="text-xs bg-red-100 text-red-600 px-2 py-1 rounded-full border border-red-200">
+                            Máx/toma: {med.maxDosisPorToma} {med.unidadDosis}
+                          </span>
+                        )}
+                        {med.maxDosisPorDia && (
+                          <span className="text-xs bg-purple-100 text-purple-600 px-2 py-1 rounded-full border border-purple-200">
+                            Máx/día: {med.maxDosisPorDia} {med.unidadDosis}
+                          </span>
+                        )}
+                      </div>
                     </div>
-                    <p className="text-gray-600 mb-1 text-sm">Dosis: {med.dosis}</p>
-                    <p className="text-gray-600 mb-3 text-sm">Presentación: {med.presentacion}</p>
-                    {med.notas && (
-                      <p className="text-blue-600 mb-2 text-xs italic bg-blue-50 p-2 rounded">
-                        Nota: {med.notas}
-                      </p>
-                    )}
-                    {peso && parseFloat(peso) > 0 && (
-                      <div className="bg-orange-100 p-4 rounded-lg border-2 border-orange-300 mb-2">
-                        <p className="text-orange-900 font-medium">
-                          Dosis calculada: <span className="text-xl font-bold">{calcularDosis(med.nombre, parseFloat(peso))} {med.nombre === 'Bicarbonato' ? 'mEq' : 'mg'}</span>
-                        </p>
+
+                    {/* Info */}
+                    <div className="space-y-1 mb-3">
+                      <p className="text-gray-700 text-sm"><span className="font-medium">Dosis:</span> {med.dosisTexto}</p>
+                      <p className="text-gray-700 text-sm"><span className="font-medium">Vía:</span> {med.via}</p>
+                      <p className="text-gray-700 text-sm"><span className="font-medium">Frecuencia:</span> {med.frecuencia}</p>
+                      <p className="text-gray-700 text-sm"><span className="font-medium">Tomas:</span> {med.numTomasDia}</p>
+                    </div>
+
+                    {/* Selector de presentación */}
+                    {med.presentaciones.length > 1 && (
+                      <div className="mb-3">
+                        <label className="text-xs text-gray-500 block mb-1">Presentación:</label>
+                        <div className="relative">
+                          <select
+                            value={getPresentacionIdx(med.nombre)}
+                            onChange={(e) => setSelectedPresentaciones(prev => ({
+                              ...prev,
+                              [med.nombre]: parseInt(e.target.value)
+                            }))}
+                            className="w-full p-2.5 pr-10 border-2 border-blue-200 rounded-lg text-sm bg-white focus:border-blue-400 focus:outline-none appearance-none"
+                          >
+                            {med.presentaciones.map((pres, idx) => (
+                              <option key={idx} value={idx}>
+                                {pres.nombre} ({pres.concentracion} {pres.unidadConcentracion})
+                              </option>
+                            ))}
+                          </select>
+                          <ChevronDown className="absolute right-3 top-3 w-4 h-4 text-gray-400 pointer-events-none" />
+                        </div>
                       </div>
                     )}
+
+                    {/* Presentación única */}
+                    {med.presentaciones.length === 1 && (
+                      <p className="text-gray-600 text-sm mb-3">
+                        <span className="font-medium">Presentación:</span> {med.presentaciones[0].nombre} ({med.presentaciones[0].concentracion} {med.presentaciones[0].unidadConcentracion})
+                      </p>
+                    )}
+
+                    {/* Notas */}
+                    {med.notas && (
+                      <p className="text-blue-700 mb-3 text-xs italic bg-blue-50 p-2.5 rounded-lg border border-blue-100">
+                        💡 {med.notas}
+                      </p>
+                    )}
+
+                    {/* Alertas */}
+                    {med.alertas && med.alertas.length > 0 && (
+                      <div className="mb-3 bg-red-50 p-2.5 rounded-lg border border-red-100">
+                        {med.alertas.map((alerta, idx) => (
+                          <p key={idx} className="text-red-700 text-xs flex items-start gap-1">
+                            <AlertCircle className="w-3 h-3 mt-0.5 flex-shrink-0" />
+                            {alerta}
+                          </p>
+                        ))}
+                      </div>
+                    )}
+
+                    {/* Resultado calculado */}
+                    {peso && parseFloat(peso) > 0 && (
+                      <div className="bg-gradient-to-r from-orange-50 to-blue-50 p-4 rounded-lg border-2 border-orange-300">
+                        <p className="text-sm font-bold text-gray-700 mb-2">📊 Resultado para {peso} kg:</p>
+                        {renderDosisCalculada(med, parseFloat(peso))}
+                      </div>
+                    )}
+
+                    {/* Fuente */}
                     {med.fuente && (
                       <a
                         href={med.fuente}
                         target="_blank"
                         rel="noopener noreferrer"
-                        className="text-xs text-gray-400 hover:text-blue-500 underline flex items-center gap-1"
+                        className="mt-2 text-xs text-gray-400 hover:text-blue-500 underline flex items-center gap-1"
                       >
                         Fuente: Guía Farmacológica Pediátrica
                       </a>

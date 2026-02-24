@@ -2,6 +2,7 @@ import { useState } from 'react';
 import { motion, AnimatePresence } from 'motion/react';
 import { ArrowLeft, Search, Database, Calculator, FileText, ChevronRight, Pill, Droplet, Activity, Image as ImageIcon, X } from 'lucide-react';
 import { useNavigate } from 'react-router-dom';
+import DripRateCalculator from '../components/DripRateCalculator';
 
 // Images
 import glasgowImg from '../assets/img/GLASGOW.jpg';
@@ -411,6 +412,8 @@ export default function NonEmergency() {
               </button>
               <h2 className="flex-1 text-orange-600">Calculadoras Clínicas</h2>
             </div>
+
+            <DripRateCalculator />
 
             <div className="mb-6 bg-orange-50 p-6 rounded-xl border-2 border-orange-200">
               <label className="block mb-3 font-bold text-orange-800">Peso del paciente (kg):</label>

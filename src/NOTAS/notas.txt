@@ -1,3 +1,22 @@
+Hay un archivo de "DOSIS PEDIATRICA - YOPAL.xlsx" 
+ese archivo como tiene 100 medicamentos, que son los más frecuentes del PEDIADOSIS
+en el libro PEDIADOSIS hay como 400, que no lo tengo todavia.
+
+
+
+En celdas AZULES están los datos que el usuario debe ingresar.
+En celdas VERDES están los datos que la app calcula.
+hablo de el archivo "dosis ninos Y YOPAL INTEGRADO.xlsx"
+
+una vez ingresado los kilos del paciente, 
+tendria que tener un buscardor de medicamento, por ejemplo, Metroclopramida.
+congelando la fila de arriba, freeze, para que no se pierda el nombre del medicamento.
+
+yo recurro mucho a Medscape
+ALGA - Gases Arteriales, es una app muy buena
+Drip rate calc "calculadora de dosis"
+
+
 Propuesta de proyecto: Desarrollo de una app para diagnóstico de enfermedades pediátricas
 ANDROID
 
