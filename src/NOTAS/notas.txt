@@ -2,7 +2,7 @@ Hay un archivo de "DOSIS PEDIATRICA - YOPAL.xlsx"
 ese archivo como tiene 100 medicamentos, que son los más frecuentes del PEDIADOSIS
 en el libro PEDIADOSIS hay como 400, que no lo tengo todavia.
 
-
+el mejor mouse fantasta, ReMouse Micro, 4 dolares al año
 
 En celdas AZULES están los datos que el usuario debe ingresar.
 En celdas VERDES están los datos que la app calcula.
@@ -15,6 +15,17 @@ congelando la fila de arriba, freeze, para que no se pierda el nombre del medica
 yo recurro mucho a Medscape
 ALGA - Gases Arteriales, es una app muy buena
 Drip rate calc "calculadora de dosis"
+
+
+
+ARCHIVOS 
+resumen era.pdf
+Asma en excel, marca con una x, la escala de TAL, tiene que saber diferenciar un estridos de una sibilancia, 
+dosis ninos Y YOPAL INTEGRADO.xlsx
+dosis pediátrica YOPAL.xlsx 
+
+
+---
 
 
 Propuesta de proyecto: Desarrollo de una app para diagnóstico de enfermedades pediátricas

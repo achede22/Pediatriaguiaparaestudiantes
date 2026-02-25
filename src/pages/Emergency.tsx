@@ -12,8 +12,9 @@ import anafilaxiaImg from '../assets/img/cardio/ALGORITMO DE SINDROME CORONARIO 
 import asmaImg from '../assets/img/respiratorio/algoritmo asma niños.jpg';
 import acvImg from '../assets/img/neuro/algoritmo_acv.jpg';
 import shockImg from '../assets/img/cardio/TAQUICARDIA CON PULSO.jpg'; // Placeholder/Best fit
+import EmergencyProtocols from '../components/EmergencyProtocols';
 
-type Section = 'main' | 'algoritmos' | 'calculadoras' | 'procedimientos';
+type Section = 'main' | 'algoritmos' | 'calculadoras' | 'procedimientos' | 'protocolos';
 
 interface AlgorithmStep {
   id: string;
@@ -607,6 +608,20 @@ export default function Emergency() {
               <div className="flex-1 text-left">
                 <h3 className="text-blue-600">Guía de Procedimientos</h3>
                 <p className="text-gray-600">Intubación, Acceso venoso, Ventilación</p>
+              </div>
+            </button>
+
+            <button
+              onClick={() => setSection('protocolos')}
+              className="w-full bg-white p-6 rounded-2xl shadow-lg hover:shadow-xl active:scale-98 transition-all
+                       border-2 border-purple-200 hover:border-purple-400 flex items-center gap-4"
+            >
+              <div className="w-16 h-16 bg-purple-100 rounded-xl flex items-center justify-center">
+                <Activity className="w-8 h-8 text-purple-600" />
+              </div>
+              <div className="flex-1 text-left">
+                <h3 className="text-purple-600">Protocolos de Urgencia Estrictos</h3>
+                <p className="text-gray-600">Crisis Asmática Severa, Estatus Convulsivo</p>
               </div>
             </button>
 

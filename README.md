@@ -18,11 +18,13 @@ Una herramienta educativa para estudiantes de medicina pediátrica con algoritmo
 
 ### 🚨 Sección Emergencia
 - **Algoritmos Interactivos:** RCP pediátrica, Anafilaxia, Crisis asmática, Convulsiones, etc.
+- **Triaje Respiratorio Agudo:** Protocolos rápidos para el diagnóstico y tratamiento de Crup Grave, Bronquiolitis Grave y crisis de Sibilancias, con evaluación interactiva de signos de alarma (saturación, tiraje, alteración de conciencia).
 - **Calculadora de Dosis Críticas:** Adrenalina, Atropina, Bicarbonato, etc.
 - **Guías de Procedimientos:** Intubación, acceso venoso, ventilación
 
 ### 🏥 Sección Consulta General
-- **Descarte de Enfermedades:** Búsqueda por síntomas
+- **Descarte de Enfermedades:** Búsqueda por síntomas y evaluación sistemática de pacientes.
+- **Evaluación Respiratoria Ambulatoria:** Checklist interactivo de síntomas para clasificar y manejar Crup, Bronquiolitis y Sibilancias recurrentes, ajustado por edad, peso y sexo.
 - **Vademécum Pediátrico:** Dosis, presentaciones y frecuencias
 - **Calculadoras Clínicas:** Mantenimiento hídrico, IMC, filtrado glomerular
 - **Algoritmos Clínicos:** ITU, neumonía, gastroenteritis, etc.

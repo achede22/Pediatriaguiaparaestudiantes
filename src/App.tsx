@@ -125,15 +125,24 @@ function Home() {
 
 export default function App() {
   return (
-    <div className="min-h-screen bg-gradient-to-br from-blue-50 to-indigo-50 overflow-hidden font-sans">
-      <AnimatePresence mode="wait">
-        <Routes>
-          <Route path="/" element={<Home />} />
-          <Route path="/emergency" element={<Emergency />} />
-          <Route path="/non-emergency" element={<NonEmergency />} />
-          <Route path="/diagnostic" element={<DiagnosticHelper onGoBack={() => window.history.back()} />} />
-        </Routes>
-      </AnimatePresence>
+    <div className="min-h-screen bg-gradient-to-br from-blue-50 to-indigo-50 font-sans flex flex-col">
+      <div className="flex-1">
+        <AnimatePresence mode="wait">
+          <Routes>
+            <Route path="/" element={<Home />} />
+            <Route path="/emergency" element={<Emergency />} />
+            <Route path="/non-emergency" element={<NonEmergency />} />
+            <Route path="/diagnostic" element={<DiagnosticHelper onGoBack={() => window.history.back()} />} />
+          </Routes>
+        </AnimatePresence>
+      </div>
+
+      {/* Banner Global Footer */}
+      <div className="w-full bg-slate-900 border-t-4 border-red-500 text-slate-300 text-center py-4 px-4 text-xs mt-auto">
+        <p className="max-w-4xl mx-auto font-medium leading-relaxed">
+          <span className="font-bold text-white uppercase tracking-wider">Aviso Médico:</span> Esta información es sugerida para estudiantes de pediatría con fines educativos. <span className="text-red-400 font-bold uppercase">Este diagnóstico no tiene validez clínica. SIEMPRE consulte a un médico certificado.</span>
+        </p>
+      </div>
     </div>
   );
 }
